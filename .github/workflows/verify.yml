@@ -1,0 +1,152 @@
+---
+name: Verify
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
+  packages: read
+  id-token: write
+
+env:
+  GO111MODULE: "on"
+
+jobs:
+  conform:
+    runs-on: ubuntu-latest
+    name: Conform
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: siderolabs/conform@v0.1.0-alpha.27
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  lint_provider:
+    runs-on: ubuntu-latest
+    name: Lint Provider
+    strategy:
+      max-parallel: 4
+      matrix:
+        go-version: [1.21.x]
+        golangci-lint-version: [v1.54.2]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: "${{ matrix.go-version }}"
+
+      - name: Lint Provider
+        uses: golangci/golangci-lint-action@v3
+        with:
+          version: "${{ matrix.golangci-lint-version }}"
+          args: -c .golangci.yml
+          skip-pkg-cache: true
+          skip-build-cache: true
+
+      - name: Vet Provider
+        run: |
+          go vet ./...
+
+  test:
+    runs-on: ubuntu-latest
+    name: Unit Tests
+    strategy:
+      max-parallel: 4
+      matrix:
+        go-version: [1.21.x]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: "${{ matrix.go-version }}"
+
+      - name: Run Tests
+        run: |
+          make test
+
+      - run: |
+          go install github.com/mattn/goveralls@latest
+          goveralls -coverprofile=covprofile -service=github
+        env:
+          COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  dockerfile_lint:
+    runs-on: ubuntu-latest
+    name: Lint Dockerfile
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Lint Dockerfile
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
+
+  build:
+    runs-on: ubuntu-latest
+    name: Build Provider and Container
+    needs:
+      - lint_provider
+      - dockerfile_lint
+      - test
+    strategy:
+      max-parallel: 4
+      matrix:
+        go-version: [1.21.x]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: "${{ matrix.go-version }}"
+
+      - name: Install cosign
+        uses: sigstore/cosign-installer@v3.1.2
+      - name: Download Syft
+        uses: anchore/sbom-action/download-syft@v0.14.3
+
+      - name: Setup QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Release via GoReleaser
+        uses: goreleaser/goreleaser-action@v5
+        with:
+          args: -p 3 release --snapshot --clean --skip=publish --timeout 60m0s
+          version: latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CI_COMMIT_TIMESTAMP: ${{ github.event.pull_request.updated_at }}
+          CI_COMMIT_SHA: ${{ github.sha }}
+          CI_COMMIT_TAG: ${{ github.sha }}-dev

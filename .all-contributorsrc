@@ -1,0 +1,29 @@
+{
+  "projectName": "external-dns-provider-adguard",
+  "projectOwner": "muhlba91",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "muhlba91",
+      "name": "Daniel Mühlbachler-Pietrzykowski",
+      "avatar_url": "https://avatars.githubusercontent.com/u/653739?v=4",
+      "profile": "https://muehlbachler.io/",
+      "contributions": [
+        "maintenance",
+        "code",
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "linkToUsage": false,
+  "skipCi": true,
+  "commitConvention": "angular",
+  "commitType": "docs"
+}
