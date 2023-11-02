@@ -1,0 +1,86 @@
+---
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: read
+  packages: write
+  id-token: write
+
+env:
+  GO111MODULE: "on"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    name: Release
+    outputs:
+      release_created: ${{ steps.release.outputs.releases_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - uses: google-github-actions/release-please-action@v3
+        id: release
+        with:
+          command: manifest
+
+  provider:
+    if: needs.release.outputs.release_created
+    runs-on: ubuntu-latest
+    name: Publish Provider
+    permissions:
+      id-token: write
+      contents: write
+    needs:
+      - release
+    strategy:
+      max-parallel: 4
+      matrix:
+        go-version: [1.21.x]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: "${{ matrix.go-version }}"
+
+      - name: Install cosign
+        uses: sigstore/cosign-installer@v3.1.2
+      - name: Download Syft
+        uses: anchore/sbom-action/download-syft@v0.14.3
+
+      - name: Setup QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to ghcr.io
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Release via GoReleaser
+        uses: goreleaser/goreleaser-action@v5
+        with:
+          args: -p 3 release --clean --timeout 60m0s
+          version: latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CI_COMMIT_TIMESTAMP: ${{ github.event.repository.updated_at }}
+          CI_COMMIT_SHA: ${{ github.sha }}
+          CI_COMMIT_TAG: ${{ needs.release.outputs.tag_name }}

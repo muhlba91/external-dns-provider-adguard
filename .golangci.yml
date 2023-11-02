@@ -1,0 +1,23 @@
+linters:
+  enable:
+    - errcheck
+    - goconst
+    - revive
+    - gosec
+    - govet
+    - ineffassign
+    - lll
+    - megacheck
+    - misspell
+    - nakedret
+    - unconvert
+    - unused
+  enable-all: false
+linters-settings:
+  lll:
+    line-length: 250
+run:
+  skip-files:
+    - schema.go
+    - pulumiManifest.go
+  timeout: 10m

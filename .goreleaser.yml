@@ -1,0 +1,100 @@
+---
+archives:
+  - id: archive
+    name_template: '{{ .Binary }}-{{ .Tag }}-{{ .Os }}-{{ .Arch }}'
+builds:
+  - binary: external-dns-provider-adguard
+    env:
+      - CGO_ENABLED=0
+      - GO111MODULE=on
+    goarch:
+      - amd64
+      - arm64
+    goos:
+      - darwin
+      - windows
+      - linux
+    ldflags:
+      - -X 'main.Version={{ .Tag }}'
+      - -X 'main.Gitsha={{ .ShortCommit }}'
+    main: ./cmd/webhook
+source:
+  enabled: true
+signs:
+  - cmd: cosign
+    env:
+      - COSIGN_EXPERIMENTAL=1
+    certificate: '${artifact}.pem'
+    args:
+      - sign-blob
+      - --yes
+      - '--output-certificate=${certificate}'
+      - '--bundle=${signature}'
+      - '${artifact}'
+    artifacts: all
+    output: true
+sboms:
+  - artifacts: archive
+  - id: source
+    artifacts: source
+dockers:
+  - use: buildx
+    goos: linux
+    goarch: amd64
+    image_templates:
+      - ghcr.io/muhlba91/external-dns-provider-adguard:latest-amd64
+      - ghcr.io/muhlba91/external-dns-provider-adguard:{{ .Env.CI_COMMIT_SHA }}-amd64
+      - ghcr.io/muhlba91/external-dns-provider-adguard:{{ .Env.CI_COMMIT_TAG }}-amd64
+    build_flag_templates:
+      - --pull
+      - --platform=linux/amd64
+      - --build-arg=CI_COMMIT_TIMESTAMP="{{ .Env.CI_COMMIT_TIMESTAMP }}"
+      - --build-arg=CI_COMMIT_SHA="{{ .Env.CI_COMMIT_SHA }}"
+      - --build-arg=CI_COMMIT_TAG="{{ .Env.CI_COMMIT_TAG }}"
+  - use: buildx
+    goos: linux
+    goarch: arm64
+    image_templates:
+      - ghcr.io/muhlba91/external-dns-provider-adguard:latest-arm64
+      - ghcr.io/muhlba91/external-dns-provider-adguard:{{ .Env.CI_COMMIT_SHA }}-arm64
+      - ghcr.io/muhlba91/external-dns-provider-adguard:{{ .Env.CI_COMMIT_TAG }}-arm64
+    build_flag_templates:
+      - --pull
+      - --platform=linux/arm64
+      - --build-arg=CI_COMMIT_TIMESTAMP="{{ .Env.CI_COMMIT_TIMESTAMP }}"
+      - --build-arg=CI_COMMIT_SHA="{{ .Env.CI_COMMIT_SHA }}"
+      - --build-arg=CI_COMMIT_TAG="{{ .Env.CI_COMMIT_TAG }}"
+docker_manifests:
+  - name_template: ghcr.io/muhlba91/external-dns-provider-adguard:latest
+    image_templates:
+      - ghcr.io/muhlba91/external-dns-provider-adguard:latest-amd64
+      - ghcr.io/muhlba91/external-dns-provider-adguard:latest-arm64
+  - name_template: ghcr.io/muhlba91/external-dns-provider-adguard:{{ .Env.CI_COMMIT_SHA }}
+    image_templates:
+      - ghcr.io/muhlba91/external-dns-provider-adguard:{{ .Env.CI_COMMIT_SHA }}-amd64
+      - ghcr.io/muhlba91/external-dns-provider-adguard:{{ .Env.CI_COMMIT_SHA }}-arm64
+  - name_template: ghcr.io/muhlba91/external-dns-provider-adguard:{{ .Env.CI_COMMIT_TAG }}
+    image_templates:
+      - ghcr.io/muhlba91/external-dns-provider-adguard:{{ .Env.CI_COMMIT_TAG }}-amd64
+      - ghcr.io/muhlba91/external-dns-provider-adguard:{{ .Env.CI_COMMIT_TAG }}-arm64
+changelog:
+  skip: true
+  use: github
+  filters:
+    exclude:
+      - '^docs'
+      - '^chore'
+  groups:	
+    - title: 'New Features'	
+      regexp: "^.*feat[(\\w)]*:+.*$"	
+      order: 0	
+    - title: 'Bugfixes'	
+      regexp: "^.*fix[(\\w)]*:+.*$"	
+      order: 10	
+    - title: Other Work	
+      order: 999
+release:
+  disable: false
+  prerelease: auto
+snapshot:
+  name_template: '{{ .Tag }}-SNAPSHOT'
