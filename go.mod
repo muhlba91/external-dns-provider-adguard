@@ -6,7 +6,7 @@ toolchain go1.21.3
 
 require (
 	github.com/caarlos0/env/v8 v8.0.0
-	github.com/go-chi/chi/v5 v5.0.8
+	github.com/go-chi/chi/v5 v5.0.10
 	github.com/sirupsen/logrus v1.9.3
 	github.com/stretchr/testify v1.8.4
 	golang.org/x/exp v0.0.0-20231006140011-7918f672742d
