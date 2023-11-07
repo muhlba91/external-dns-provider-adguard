@@ -131,6 +131,8 @@ sigs.k8s.io/external-dns v0.13.7-0.20231027112202-d8f408b8a51a h1:YBgvZEyohKaXvy
 sigs.k8s.io/external-dns v0.13.7-0.20231027112202-d8f408b8a51a/go.mod h1:d4Knr/BFz8U1Lc6yLhCzTRP6nJOz6fqR/MnqqJPcIlU=
 sigs.k8s.io/external-dns v0.13.7-0.20231107093028-9f7167fb82de h1:8ESep9M2vJHn2apMqs6x91Tb8fcjFhcocY2iO38gzfE=
 sigs.k8s.io/external-dns v0.13.7-0.20231107093028-9f7167fb82de/go.mod h1:d4Knr/BFz8U1Lc6yLhCzTRP6nJOz6fqR/MnqqJPcIlU=
+sigs.k8s.io/external-dns v0.14.0 h1:pgY3DdyoBei+ej1nyZUzRt9ECm9RRwb9s6/CPWe51tc=
+sigs.k8s.io/external-dns v0.14.0/go.mod h1:d4Knr/BFz8U1Lc6yLhCzTRP6nJOz6fqR/MnqqJPcIlU=
 sigs.k8s.io/json v0.0.0-20221116044647-bc3834ca7abd h1:EDPBXCAspyGV4jQlpZSudPeMmr1bNJefnuqLsRAsHZo=
 sigs.k8s.io/json v0.0.0-20221116044647-bc3834ca7abd/go.mod h1:B8JuhiUyNFVKdsE8h686QcCxMaH6HrOAZj4vswFpcB0=
 sigs.k8s.io/structured-merge-diff/v4 v4.2.3 h1:PRbqxJClWWYMNV1dhaG4NsibJbArud9kFxnAMREiWFE=
