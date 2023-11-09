@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.0](https://github.com/muhlba91/external-dns-provider-adguard/compare/v1.0.1...v2.0.0) (2023-11-09)
+
+
+### Bug Fixes
+
+* fix release docker images ([593192a](https://github.com/muhlba91/external-dns-provider-adguard/commit/593192aec9d3448ec5fbce0a1039936550b609ad))
+
 ## [1.0.1](https://github.com/muhlba91/external-dns-provider-adguard/compare/v1.0.0...v1.0.1) (2023-11-09)
 
 
