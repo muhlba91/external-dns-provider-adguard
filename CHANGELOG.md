@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/muhlba91/external-dns-provider-adguard/compare/v1.0.0...v1.0.1) (2023-11-09)
+
+
+### Bug Fixes
+
+* fix release permissions ([2c16420](https://github.com/muhlba91/external-dns-provider-adguard/commit/2c16420114023fca85c6f5fdd31080799db6fbe5))
+
 ## [1.0.0](https://github.com/muhlba91/external-dns-provider-adguard/compare/v0.1.0...v1.0.0) (2023-11-09)
 
 
