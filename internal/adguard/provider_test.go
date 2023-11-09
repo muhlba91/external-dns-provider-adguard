@@ -97,21 +97,26 @@ func TestEndpointSupported(t *testing.T) {
 		{
 			name:     "SRV record",
 			endpoint: endpoint.NewEndpoint("domain.com", endpoint.RecordTypeSRV, "rsv"),
-			valid:    false,
+			valid:    true,
 		},
 		{
 			name:     "NS record",
 			endpoint: endpoint.NewEndpoint("domain.com", endpoint.RecordTypeNS, "1.1.1.1"),
-			valid:    false,
+			valid:    true,
 		},
 		{
 			name:     "PTR record",
 			endpoint: endpoint.NewEndpoint("1.1.1.1", endpoint.RecordTypePTR, "domain.com"),
-			valid:    false,
+			valid:    true,
 		},
 		{
 			name:     "MX record",
 			endpoint: endpoint.NewEndpoint("1.1.1.1", endpoint.RecordTypeMX, "10 mail.domain.com."),
+			valid:    true,
+		},
+		{
+			name:     "SOA record",
+			endpoint: endpoint.NewEndpoint("1.1.1.1", "SOA", "invalid record"),
 			valid:    false,
 		},
 	}
@@ -594,7 +599,7 @@ func TestApplyChanges(t *testing.T) {
 				Create: []*endpoint.Endpoint{
 					{
 						DNSName:    "domain.com",
-						RecordType: endpoint.RecordTypeSRV,
+						RecordType: "SOA",
 						Targets: []string{
 							"srv",
 						},
