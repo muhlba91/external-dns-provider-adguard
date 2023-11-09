@@ -21,6 +21,10 @@ The following DNS record types are supported:
 - `AAAA`
 - `CNAME`
 - `TXT`
+- `SRV`
+- `NS`
+- `PTR`
+- `MX`
 
 ## Adguard Home Filtering Rules
 
