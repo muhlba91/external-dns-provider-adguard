@@ -26,10 +26,6 @@ var (
 	errNotManaged = fmt.Errorf("not managed by external-dns")
 )
 
-const (
-	managedBy = "$managed-by-external-dns"
-)
-
 // NewAdguardProvider initializes a new provider
 func NewAdguardProvider(domainFilter endpoint.DomainFilter, config *Configuration) (provider.Provider, error) {
 	log.Debugf("using adguard at %s", config.URL)
@@ -189,17 +185,11 @@ func endpointSupported(e *endpoint.Endpoint) bool {
 }
 
 func deserializeToEndpoint(rule string) (*endpoint.Endpoint, error) {
-	// unmanaged rules must not be deserialized
-	if !strings.Contains(rule, managedBy) {
-		return nil, errNotManaged
-	}
-
-	// format: "||DNS.NAME^dnsrewrite=NOERROR;RECORD_TYPE;TARGET #MANAGED_BY_TEXT"
+	// format: "||DNS.NAME^dnsrewrite=NOERROR;RECORD_TYPE;TARGET"
 	p := strings.SplitN(rule, ";", 3)
 	if len(p) != 3 {
-		return nil, fmt.Errorf("invalid rule: %s", rule)
+		return nil, errNotManaged
 	}
-	t := strings.TrimSuffix(p[2], fmt.Sprintf(" #%s", managedBy))
 	dp := strings.SplitN(p[0], "^", 2)
 	if len(dp) != 2 {
 		return nil, fmt.Errorf("invalid rule: %s", rule)
@@ -210,7 +200,7 @@ func deserializeToEndpoint(rule string) (*endpoint.Endpoint, error) {
 	r := &endpoint.Endpoint{
 		RecordType: p[1],
 		DNSName:    d,
-		Targets:    endpoint.Targets{t},
+		Targets:    endpoint.Targets{p[2]},
 	}
 
 	return r, nil
@@ -219,8 +209,8 @@ func deserializeToEndpoint(rule string) (*endpoint.Endpoint, error) {
 func serializeToString(e *endpoint.Endpoint) []string {
 	r := []string{}
 	for _, t := range e.Targets {
-		// format: "||DNS.NAME^dnsrewrite=NOERROR;RECORD_TYPE;TARGET #MANAGED_BY_TEXT"
-		r = append(r, fmt.Sprintf("||%s^$dnsrewrite=NOERROR;%s;%s #%s", e.DNSName, e.RecordType, t, managedBy))
+		// format: "||DNS.NAME^dnsrewrite=NOERROR;RECORD_TYPE;TARGET"
+		r = append(r, fmt.Sprintf("||%s^$dnsrewrite=NOERROR;%s;%s", e.DNSName, e.RecordType, t))
 	}
 	return r
 }

@@ -139,32 +139,32 @@ func TestDeserializeToEndpoint(t *testing.T) {
 	}{
 		{
 			name:     "A record",
-			text:     fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1 #%s", managedBy),
+			text:     "||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
 			endpoint: &endpoint.Endpoint{DNSName: "domain.com", RecordType: endpoint.RecordTypeA, Targets: []string{"1.1.1.1"}},
 		},
 		{
 			name:     "AAAA record",
-			text:     fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1 #%s", managedBy),
+			text:     "||domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1",
 			endpoint: &endpoint.Endpoint{DNSName: "domain.com", RecordType: endpoint.RecordTypeAAAA, Targets: []string{"1111:1111::1"}},
 		},
 		{
 			name:     "TXT record",
-			text:     fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;TXT;external-dns-txt #%s", managedBy),
+			text:     "||domain.com^$dnsrewrite=NOERROR;TXT;external-dns-txt",
 			endpoint: &endpoint.Endpoint{DNSName: "domain.com", RecordType: endpoint.RecordTypeTXT, Targets: []string{"external-dns-txt"}},
 		},
 		{
 			name:     "long TXT record",
-			text:     fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;TXT;\"external-dns-txt; d=abc; v=...\" #%s", managedBy),
+			text:     "||domain.com^$dnsrewrite=NOERROR;TXT;\"external-dns-txt; d=abc; v=...\"",
 			endpoint: &endpoint.Endpoint{DNSName: "domain.com", RecordType: endpoint.RecordTypeTXT, Targets: []string{"\"external-dns-txt; d=abc; v=...\""}},
 		},
 		{
 			name:     "CNAME record",
-			text:     fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;CNAME;other.org #%s", managedBy),
+			text:     "||domain.com^$dnsrewrite=NOERROR;CNAME;other.org",
 			endpoint: &endpoint.Endpoint{DNSName: "domain.com", RecordType: endpoint.RecordTypeCNAME, Targets: []string{"other.org"}},
 		},
 		{
 			name:        "invalid record",
-			text:        fmt.Sprintf("@@||abc.com #%s", managedBy),
+			text:        "@@||abc.com",
 			expectedErr: true,
 		},
 		{
@@ -197,29 +197,29 @@ func TestSerializeToString(t *testing.T) {
 	}{
 		{
 			name:     "A record",
-			text:     []string{fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1 #%s", managedBy)},
+			text:     []string{"||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1"},
 			endpoint: &endpoint.Endpoint{DNSName: "domain.com", RecordType: endpoint.RecordTypeA, Targets: []string{"1.1.1.1"}},
 		},
 		{
 			name:     "AAAA record",
-			text:     []string{fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1 #%s", managedBy)},
+			text:     []string{"||domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1"},
 			endpoint: &endpoint.Endpoint{DNSName: "domain.com", RecordType: endpoint.RecordTypeAAAA, Targets: []string{"1111:1111::1"}},
 		},
 		{
 			name:     "TXT record",
-			text:     []string{fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;TXT;external-dns-txt #%s", managedBy)},
+			text:     []string{"||domain.com^$dnsrewrite=NOERROR;TXT;external-dns-txt"},
 			endpoint: &endpoint.Endpoint{DNSName: "domain.com", RecordType: endpoint.RecordTypeTXT, Targets: []string{"external-dns-txt"}},
 		},
 		{
 			name:     "CNAME record",
-			text:     []string{fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;CNAME;other.org #%s", managedBy)},
+			text:     []string{"||domain.com^$dnsrewrite=NOERROR;CNAME;other.org"},
 			endpoint: &endpoint.Endpoint{DNSName: "domain.com", RecordType: endpoint.RecordTypeCNAME, Targets: []string{"other.org"}},
 		},
 		{
 			name: "multiple records",
 			text: []string{
-				fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1 #%s", managedBy),
-				fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2 #%s", managedBy),
+				"||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
+				"||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
 			},
 			endpoint: &endpoint.Endpoint{DNSName: "domain.com", RecordType: endpoint.RecordTypeA, Targets: []string{"1.1.1.1", "2.2.2.2"}},
 		},
@@ -243,10 +243,10 @@ func TestRecords(t *testing.T) {
 			domainFilter: endpoint.DomainFilter{},
 			filteringRules: getFilteringRules{
 				UserRules: []string{
-					fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1 #%s", managedBy),
-					fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2 #%s", managedBy),
-					fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1 #%s", managedBy),
-					fmt.Sprintf("||other.org^$dnsrewrite=NOERROR;A;3.3.3.3 #%s", managedBy),
+					"||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
+					"||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
+					"||domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1",
+					"||other.org^$dnsrewrite=NOERROR;A;3.3.3.3",
 				},
 			},
 			endpoints: []*endpoint.Endpoint{
@@ -280,10 +280,9 @@ func TestRecords(t *testing.T) {
 			domainFilter: endpoint.DomainFilter{},
 			filteringRules: getFilteringRules{
 				UserRules: []string{
-					fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1 #%s", managedBy),
-					fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2 #%s", managedBy),
-					fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1 #%s", managedBy),
-					"||other.org^$dnsrewrite=NOERROR;A;3.3.3.3 #unmanaged",
+					"||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
+					"||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
+					"||domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1",
 					"@@||other.org",
 				},
 			},
@@ -311,10 +310,10 @@ func TestRecords(t *testing.T) {
 			domainFilter: endpoint.NewDomainFilter([]string{"domain.com"}),
 			filteringRules: getFilteringRules{
 				UserRules: []string{
-					fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1 #%s", managedBy),
-					fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2 #%s", managedBy),
-					fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1 #%s", managedBy),
-					fmt.Sprintf("||other.org^$dnsrewrite=NOERROR;A;3.3.3.3 #%s", managedBy),
+					"||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
+					"||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
+					"||domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1",
+					"||other.org^$dnsrewrite=NOERROR;A;3.3.3.3",
 				},
 			},
 			endpoints: []*endpoint.Endpoint{
@@ -341,7 +340,7 @@ func TestRecords(t *testing.T) {
 			domainFilter: endpoint.DomainFilter{},
 			filteringRules: getFilteringRules{
 				UserRules: []string{
-					fmt.Sprintf("||domain.com$dnsrewrite=NOERROR;A;1.1.1.1 whatever #%s", managedBy),
+					"||domain.com$dnsrewrite=NOERROR;A;1.1.1.1 whatever",
 				},
 			},
 		},
@@ -386,10 +385,10 @@ func TestApplyChanges(t *testing.T) {
 			hasError:     false,
 			domainFilter: endpoint.DomainFilter{},
 			rules: []string{
-				fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1 #%s", managedBy),
-				fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2 #%s", managedBy),
-				fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1 #%s", managedBy),
-				fmt.Sprintf("||other.org^$dnsrewrite=NOERROR;A;3.3.3.3 #%s", managedBy),
+				"||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
+				"||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
+				"||domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1",
+				"||other.org^$dnsrewrite=NOERROR;A;3.3.3.3",
 			},
 			changes: &plan.Changes{
 				Create: []*endpoint.Endpoint{
@@ -423,7 +422,7 @@ func TestApplyChanges(t *testing.T) {
 			hasError:     false,
 			domainFilter: endpoint.DomainFilter{},
 			rules: []string{
-				fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1 #%s", managedBy),
+				"||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
 			},
 			changes: &plan.Changes{
 				UpdateOld: []*endpoint.Endpoint{
@@ -452,7 +451,7 @@ func TestApplyChanges(t *testing.T) {
 			domainFilter: endpoint.DomainFilter{},
 			filteringRules: getFilteringRules{
 				UserRules: []string{
-					fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2 #%s", managedBy),
+					"||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
 				},
 			},
 			rules: []string{},
@@ -474,12 +473,12 @@ func TestApplyChanges(t *testing.T) {
 			domainFilter: endpoint.DomainFilter{},
 			filteringRules: getFilteringRules{
 				UserRules: []string{
-					fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1 #%s", managedBy),
-					fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2 #%s", managedBy),
+					"||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
+					"||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
 				},
 			},
 			rules: []string{
-				fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1 #%s", managedBy),
+				"||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
 			},
 			changes: &plan.Changes{
 				Delete: []*endpoint.Endpoint{
@@ -499,11 +498,11 @@ func TestApplyChanges(t *testing.T) {
 			domainFilter: endpoint.DomainFilter{},
 			filteringRules: getFilteringRules{
 				UserRules: []string{
-					fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2 #%s", managedBy),
+					"||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
 				},
 			},
 			rules: []string{
-				fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1 #%s", managedBy),
+				"||domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1",
 			},
 			changes: &plan.Changes{
 				Create: []*endpoint.Endpoint{
@@ -531,8 +530,8 @@ func TestApplyChanges(t *testing.T) {
 			hasError:     false,
 			domainFilter: endpoint.DomainFilter{},
 			rules: []string{
-				fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1 #%s", managedBy),
-				fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;A;3.3.3.3 #%s", managedBy),
+				"||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
+				"||domain.com^$dnsrewrite=NOERROR;A;3.3.3.3",
 			},
 			changes: &plan.Changes{
 				Create: []*endpoint.Endpoint{
@@ -570,15 +569,13 @@ func TestApplyChanges(t *testing.T) {
 			domainFilter: endpoint.DomainFilter{},
 			filteringRules: getFilteringRules{
 				UserRules: []string{
-					fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2 #%s", managedBy),
-					"||other.org^$dnsrewrite=NOERROR;A;3.3.3.3 #unmanaged",
+					"||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
 					"@@||other.org",
 				},
 			},
 			rules: []string{
-				fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2 #%s", managedBy),
-				fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1 #%s", managedBy),
-				"||other.org^$dnsrewrite=NOERROR;A;3.3.3.3 #unmanaged",
+				"||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
+				"||domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1",
 				"@@||other.org",
 			},
 			changes: &plan.Changes{
@@ -598,7 +595,7 @@ func TestApplyChanges(t *testing.T) {
 			hasError:     false,
 			domainFilter: endpoint.DomainFilter{},
 			rules: []string{
-				fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1 #%s", managedBy),
+				"||domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1",
 			},
 			changes: &plan.Changes{
 				Create: []*endpoint.Endpoint{
@@ -625,7 +622,7 @@ func TestApplyChanges(t *testing.T) {
 			domainFilter: endpoint.DomainFilter{},
 			filteringRules: getFilteringRules{
 				UserRules: []string{
-					fmt.Sprintf("||domain.com$dnsrewrite=NOERROR;A;2.2.2.2 whatever #%s", managedBy),
+					"||domain.com$dnsrewrite=NOERROR;A;2.2.2.2 whatever",
 				},
 			},
 			changes: &plan.Changes{
