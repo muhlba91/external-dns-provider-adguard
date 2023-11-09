@@ -96,7 +96,7 @@ docker_manifests:
     image_templates:
       - ghcr.io/muhlba91/external-dns-provider-adguard:{{ .Env.CI_COMMIT_TAG }}-amd64
       - ghcr.io/muhlba91/external-dns-provider-adguard:{{ .Env.CI_COMMIT_TAG }}-arm64
-      - ghcr.io/muhlba91/external-dns-provider-adguard:{{ .Env.CI_COMMIT_TAG }}-arm67
+      - ghcr.io/muhlba91/external-dns-provider-adguard:{{ .Env.CI_COMMIT_TAG }}-armv7
 changelog:
   skip: true
   use: github
