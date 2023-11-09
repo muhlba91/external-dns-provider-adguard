@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.0](https://github.com/muhlba91/external-dns-provider-adguard/compare/v2.0.0...v3.0.0) (2023-11-09)
+
+
+### Bug Fixes
+
+* fix rule creation ([2c489d4](https://github.com/muhlba91/external-dns-provider-adguard/commit/2c489d45860ec0737d69d716882cdbe6355f9ee7))
+
 ## [2.0.0](https://github.com/muhlba91/external-dns-provider-adguard/compare/v1.0.1...v2.0.0) (2023-11-09)
 
 
