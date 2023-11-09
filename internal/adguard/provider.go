@@ -178,7 +178,8 @@ func (p *Provider) Records(ctx context.Context) ([]*endpoint.Endpoint, error) {
 }
 
 func endpointSupported(e *endpoint.Endpoint) bool {
-	return e.RecordType == endpoint.RecordTypeA || e.RecordType == endpoint.RecordTypeTXT || e.RecordType == endpoint.RecordTypeAAAA || e.RecordType == endpoint.RecordTypeCNAME
+	// Adguard does not have any restriction, and we can allow all upstream/external-dns ones
+	return e.RecordType == endpoint.RecordTypeA || e.RecordType == endpoint.RecordTypeTXT || e.RecordType == endpoint.RecordTypeAAAA || e.RecordType == endpoint.RecordTypeCNAME || e.RecordType == endpoint.RecordTypeSRV || e.RecordType == endpoint.RecordTypeNS || e.RecordType == endpoint.RecordTypePTR || e.RecordType == endpoint.RecordTypeMX
 }
 
 func deserializeToEndpoint(rule string) (*endpoint.Endpoint, error) {
