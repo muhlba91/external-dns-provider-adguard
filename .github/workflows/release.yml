@@ -7,8 +7,8 @@ on:
       - main
 
 permissions:
-  contents: read
-  pull-requests: read
+  contents: write
+  pull-requests: write
   packages: write
   id-token: write
 
@@ -22,9 +22,6 @@ jobs:
     outputs:
       release_created: ${{ steps.release.outputs.releases_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
-    permissions:
-      contents: write
-      pull-requests: write
 
     steps:
       - uses: google-github-actions/release-please-action@v3
@@ -36,9 +33,6 @@ jobs:
     if: needs.release.outputs.release_created
     runs-on: ubuntu-latest
     name: Publish Provider
-    permissions:
-      id-token: write
-      contents: write
     needs:
       - release
     strategy:
