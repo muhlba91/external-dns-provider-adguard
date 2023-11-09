@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"regexp"
 	"strings"
 
 	log "github.com/sirupsen/logrus"
@@ -179,7 +178,14 @@ func (p *Provider) Records(ctx context.Context) ([]*endpoint.Endpoint, error) {
 
 func endpointSupported(e *endpoint.Endpoint) bool {
 	// Adguard does not have any restriction, and we can allow all upstream/external-dns ones
-	return e.RecordType == endpoint.RecordTypeA || e.RecordType == endpoint.RecordTypeTXT || e.RecordType == endpoint.RecordTypeAAAA || e.RecordType == endpoint.RecordTypeCNAME || e.RecordType == endpoint.RecordTypeSRV || e.RecordType == endpoint.RecordTypeNS || e.RecordType == endpoint.RecordTypePTR || e.RecordType == endpoint.RecordTypeMX
+	return e.RecordType == endpoint.RecordTypeA ||
+		e.RecordType == endpoint.RecordTypeTXT ||
+		e.RecordType == endpoint.RecordTypeAAAA ||
+		e.RecordType == endpoint.RecordTypeCNAME ||
+		e.RecordType == endpoint.RecordTypeSRV ||
+		e.RecordType == endpoint.RecordTypeNS ||
+		e.RecordType == endpoint.RecordTypePTR ||
+		e.RecordType == endpoint.RecordTypeMX
 }
 
 func deserializeToEndpoint(rule string) (*endpoint.Endpoint, error) {
@@ -189,17 +195,22 @@ func deserializeToEndpoint(rule string) (*endpoint.Endpoint, error) {
 	}
 
 	// format: "||DNS.NAME^dnsrewrite=NOERROR;RECORD_TYPE;TARGET #MANAGED_BY_TEXT"
-	re := regexp.MustCompile(`[(||)(\^$);( #)]+`)
-	p := re.Split(rule, -1)
-	if len(p) != 6 {
+	p := strings.SplitN(rule, ";", 3)
+	if len(p) != 3 {
 		return nil, fmt.Errorf("invalid rule: %s", rule)
 	}
+	t := strings.TrimSuffix(p[2], fmt.Sprintf(" #%s", managedBy))
+	dp := strings.SplitN(p[0], "^", 2)
+	if len(dp) != 2 {
+		return nil, fmt.Errorf("invalid rule: %s", rule)
+	}
+	d := strings.TrimPrefix(dp[0], "||")
 
 	// see serializeToString for the format
 	r := &endpoint.Endpoint{
-		RecordType: p[3],
-		DNSName:    p[1],
-		Targets:    endpoint.Targets{p[4]},
+		RecordType: p[1],
+		DNSName:    d,
+		Targets:    endpoint.Targets{t},
 	}
 
 	return r, nil

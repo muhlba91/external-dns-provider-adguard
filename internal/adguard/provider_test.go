@@ -153,6 +153,11 @@ func TestDeserializeToEndpoint(t *testing.T) {
 			endpoint: &endpoint.Endpoint{DNSName: "domain.com", RecordType: endpoint.RecordTypeTXT, Targets: []string{"external-dns-txt"}},
 		},
 		{
+			name:     "long TXT record",
+			text:     fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;TXT;\"external-dns-txt; d=abc; v=...\" #%s", managedBy),
+			endpoint: &endpoint.Endpoint{DNSName: "domain.com", RecordType: endpoint.RecordTypeTXT, Targets: []string{"\"external-dns-txt; d=abc; v=...\""}},
+		},
+		{
 			name:     "CNAME record",
 			text:     fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;CNAME;other.org #%s", managedBy),
 			endpoint: &endpoint.Endpoint{DNSName: "domain.com", RecordType: endpoint.RecordTypeCNAME, Targets: []string{"other.org"}},
@@ -336,7 +341,7 @@ func TestRecords(t *testing.T) {
 			domainFilter: endpoint.DomainFilter{},
 			filteringRules: getFilteringRules{
 				UserRules: []string{
-					fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1 whatever #%s", managedBy),
+					fmt.Sprintf("||domain.com$dnsrewrite=NOERROR;A;1.1.1.1 whatever #%s", managedBy),
 				},
 			},
 		},
@@ -620,7 +625,7 @@ func TestApplyChanges(t *testing.T) {
 			domainFilter: endpoint.DomainFilter{},
 			filteringRules: getFilteringRules{
 				UserRules: []string{
-					fmt.Sprintf("||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2 whatever #%s", managedBy),
+					fmt.Sprintf("||domain.com$dnsrewrite=NOERROR;A;2.2.2.2 whatever #%s", managedBy),
 				},
 			},
 			changes: &plan.Changes{
