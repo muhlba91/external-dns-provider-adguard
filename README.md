@@ -13,6 +13,11 @@ The provider is hugely based on <https://github.com/ionos-cloud/external-dns-ion
 
 ---
 
+> [!WARNING]
+> **Please make yourself familiar with the [limitations](#limitations) before using this provider!**
+
+---
+
 ## Supported DNS Record Types
 
 The following DNS record types are supported:
@@ -28,7 +33,7 @@ The following DNS record types are supported:
 
 ## Adguard Home Filtering Rules
 
-The provider manages Adguard Home filtering rules following the Adguard specification, which allows this provider to - theoretically - support all kinds of DNS record types.
+The provider manages Adguard Home filtering rules following the [Adblock-style syntax](https://github.com/AdguardTeam/AdGuardHome/wiki/Hosts-Blocklists#adblock-style), which allows this provider to - theoretically - support all kinds of DNS record types.
 
 Each record will be added in the format `||DNS.NAME^dnsrewrite=NOERROR;RECORD_TYPE;TARGET`.
 Examples are:
@@ -38,13 +43,42 @@ Examples are:
 ||my.domain.com^dnsrewrite=NOERROR;AAAA;1111:2222::3
 ```
 
-**Attention:** the provider takes ownership of **ALL** rules matching above format! If you require manually set rules, it's adviced to define them as `DNSEndpoint` objects and enable the `crd` source in external-dns.
+## Limitations
+
+### Rule Ownership
+
+> [!IMPORTANT]
+> This provider takes **ownership** of **all rules** matching above mentioned format!
+
+Adguard does not support inline comments for filtering rules, making it impossible to filter out only rules set by External DNS.
+If you require **manually set rules**, it is adviced to define them as **`DNSEndpoint`** objects and enable the `crd` source in External DNS.
+
+However, rules **not matching** above format, for example, `||domain.to.block`, **will not be modified**.
+
+### Subdomain Handling
+
+> [!IMPORTANT]
+> Adguard will evaluate **all subdomains** of a specified domain to the **exact same DNS response**, **merging multiple matching rule responses**!
+
+For this provider to support all DNS record types, it must leverage Adguard Home filtering rules based on the Adblock-style syntax.
+The downside is that Adguard will evaluate subdomains of a specified domain to the exact same DNS response(s).
+
+For example, defining a domain `test.domain.org` to resolve to `10.0.0.1` and querying any subdomain thereof, for example, `sub.test.domain.org` or `other.sub.test.domain.org`, will return `10.0.0.1`.
+Additionally, Adguard will *merge multiple matching rules*. For example, defining the domains `test.domain.org` = `10.0.0.1` and `sub.test.domain.org` = `10.0.0.2` and querying for `sub.test.domain.org` (or any subdomain thereof) will result in the multi-value DNS response of `[10.0.0.1, 10.0.0.2]`.
+
+If you have a **central ingress controller**, this usually **should not matter** because the ingress is proxying based on the domain name, path, or else.
+
+However, if you use **multiple ingress controllers** or **expose services directly** when using a **similar subdomain structure**, I recommend **not using this provider**!
+
+Unfortunately, this behaviour **cannot be turned off** in Adguard!
 
 ---
 
 ## Configuration
 
 See [cmd/webhook/init/configuration/configuration.go](./cmd/webhook/init/configuration/configuration.go) for all available configuration options of the webhook sidecar, and [internal/adguard/configuration.go](./internal/adguard/configuration.go) for all available configuration options of the Adguard provider.
+
+---
 
 ## Kubernetes Deployment
 
