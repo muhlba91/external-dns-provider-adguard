@@ -30,15 +30,15 @@ The following DNS record types are supported:
 
 The provider manages Adguard Home filtering rules following the Adguard specification, which allows this provider to - theoretically - support all kinds of DNS record types.
 
-Each record will be added in the format `||DNS.NAME^dnsrewrite=NOERROR;RECORD_TYPE;TARGET #$managed-by-external-dns`.
+Each record will be added in the format `||DNS.NAME^dnsrewrite=NOERROR;RECORD_TYPE;TARGET`.
 Examples are:
 
 ```txt
-||my.domain.com^dnsrewrite=NOERROR;A;1.2.3.4 #$managed-by-external-dns
-||my.domain.com^dnsrewrite=NOERROR;AAAA;1111:2222::3 #$managed-by-external-dns
+||my.domain.com^dnsrewrite=NOERROR;A;1.2.3.4
+||my.domain.com^dnsrewrite=NOERROR;AAAA;1111:2222::3
 ```
 
-The provider will also honour and not modify any manually created rules. The filter constraint is the `$managed-by-external-dns` comment.
+**Attention:** the provider takes ownership of **ALL** rules matching above format! If you require manually set rules, it's adviced to define them as `DNSEndpoint` objects and enable the `crd` source in external-dns.
 
 ---
 
