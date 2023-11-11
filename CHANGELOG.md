@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.1.0](https://github.com/muhlba91/external-dns-provider-adguard/compare/v3.0.0...v3.1.0) (2023-11-11)
+
+
+### Features
+
+* change health endpoint to /healthz ([29e9033](https://github.com/muhlba91/external-dns-provider-adguard/commit/29e903324a7e698797cb50b2e60ed681577503d6))
+
+
+### Miscellaneous Chores
+
+* **deps:** update golang.org/x/exp digest to 9a3e603 ([d2aaee5](https://github.com/muhlba91/external-dns-provider-adguard/commit/d2aaee5c57827876ff635320b9e2936dfdf5b383))
+
 ## [3.0.0](https://github.com/muhlba91/external-dns-provider-adguard/compare/v2.0.0...v3.0.0) (2023-11-09)
 
 
