@@ -17,7 +17,7 @@ const (
 	contentTypePlaintext  = "text/plain"
 	acceptHeader          = "Accept"
 	varyHeader            = "Vary"
-	healthPath            = "/health"
+	healthPath            = "/healthz"
 	logFieldRequestPath   = "requestPath"
 	logFieldRequestMethod = "requestMethod"
 	logFieldError         = "error"

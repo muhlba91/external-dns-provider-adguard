@@ -107,13 +107,13 @@ sidecars:
         name: http
     livenessProbe:
       httpGet:
-        path: /health
+        path: /healthz
         port: http
       initialDelaySeconds: 10
       timeoutSeconds: 5
     readinessProbe:
       httpGet:
-        path: /health
+        path: /healthz
         port: http
       initialDelaySeconds: 10
       timeoutSeconds: 5
