@@ -19,6 +19,15 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "heyzling",
+      "name": "heyzling",
+      "avatar_url": "https://avatars.githubusercontent.com/u/30411478?v=4",
+      "profile": "https://github.com/heyzling",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,

@@ -158,6 +158,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tbody>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://muehlbachler.io/"><img src="https://avatars.githubusercontent.com/u/653739?v=4?s=100" width="100px;" alt="Daniel Mühlbachler-Pietrzykowski"/><br /><sub><b>Daniel Mühlbachler-Pietrzykowski</b></sub></a><br /><a href="#maintenance-muhlba91" title="Maintenance">🚧</a> <a href="https://github.com/muhlba91/external-dns-provider-adguard/commits?author=muhlba91" title="Code">💻</a> <a href="https://github.com/muhlba91/external-dns-provider-adguard/commits?author=muhlba91" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/heyzling"><img src="https://avatars.githubusercontent.com/u/30411478?v=4?s=100" width="100px;" alt="heyzling"/><br /><sub><b>heyzling</b></sub></a><br /><a href="https://github.com/muhlba91/external-dns-provider-adguard/commits?author=heyzling" title="Documentation">📖</a></td>
     </tr>
   </tbody>
 </table>
