@@ -120,7 +120,7 @@ sidecars:
     env:
       - name: LOG_LEVEL
         value: debug
-      - name: ADGUARD_HOME
+      - name: ADGUARD_URL
         valueFrom:
           secretKeyRef:
             name: adguard-configuration
