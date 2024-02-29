@@ -67,7 +67,7 @@ func (p *Provider) ApplyChanges(ctx context.Context, changes *plan.Changes) erro
 
 	// collect all non-managed rules and existing endpoints managed by external-dns
 	for _, r := range or {
-		ep, err := deserializeToEndpoint(r)
+		ep, err := deserializeToEndpoint(r, true)
 		if err != nil {
 			// rules not managed by external-dns are kept
 			if errors.Is(err, errNotManaged) {
@@ -86,7 +86,8 @@ func (p *Provider) ApplyChanges(ctx context.Context, changes *plan.Changes) erro
 	}
 
 	// delete all records to be updated or deleted
-	for _, dep := range append(changes.UpdateOld, changes.Delete...) {
+	// TODO: remove appending changes.Create once we remove backward compatibility
+	for _, dep := range append(changes.Create, append(changes.UpdateOld, changes.Delete...)...) {
 		epk := dep.DNSName + dep.RecordType
 		if ep, ok := eps[epk]; ok {
 			for _, t := range dep.Targets {
@@ -146,7 +147,7 @@ func (p *Provider) Records(ctx context.Context) ([]*endpoint.Endpoint, error) {
 	// endpoints are referenced by dns name and record type
 	eps := make(map[string]*endpoint.Endpoint)
 	for _, rule := range resp {
-		ep, err := deserializeToEndpoint(rule)
+		ep, err := deserializeToEndpoint(rule, false)
 		if err != nil {
 			// unmanaged rules are ignored
 			if err == errNotManaged {
@@ -184,17 +185,22 @@ func endpointSupported(e *endpoint.Endpoint) bool {
 		e.RecordType == endpoint.RecordTypeMX
 }
 
-func deserializeToEndpoint(rule string) (*endpoint.Endpoint, error) {
-	// format: "||DNS.NAME^dnsrewrite=NOERROR;RECORD_TYPE;TARGET"
+func deserializeToEndpoint(rule string, migration bool) (*endpoint.Endpoint, error) {
+	// format: "|DNS.NAME^dnsrewrite=NOERROR;RECORD_TYPE;TARGET"
 	p := strings.SplitN(rule, ";", 3)
 	if len(p) != 3 {
 		return nil, errNotManaged
 	}
 	dp := strings.SplitN(p[0], "^", 2)
+	// TODO: we support backward compatibility with the old format, but we should remove it in the future (remove !migration)
+	if !migration && strings.HasPrefix(dp[0], "||") {
+		return nil, errNotManaged
+	}
 	if len(dp) != 2 {
 		return nil, fmt.Errorf("invalid rule: %s", rule)
 	}
-	d := strings.TrimPrefix(dp[0], "||")
+	// TODO: once we remove backward compatibility, we should remove the replace
+	d := strings.TrimPrefix(strings.Replace(dp[0], "||", "|", 1), "|")
 
 	// see serializeToString for the format
 	r := &endpoint.Endpoint{
@@ -209,8 +215,8 @@ func deserializeToEndpoint(rule string) (*endpoint.Endpoint, error) {
 func serializeToString(e *endpoint.Endpoint) []string {
 	r := []string{}
 	for _, t := range e.Targets {
-		// format: "||DNS.NAME^dnsrewrite=NOERROR;RECORD_TYPE;TARGET"
-		r = append(r, fmt.Sprintf("||%s^$dnsrewrite=NOERROR;%s;%s", e.DNSName, e.RecordType, t))
+		// format: "|DNS.NAME^dnsrewrite=NOERROR;RECORD_TYPE;TARGET"
+		r = append(r, fmt.Sprintf("|%s^$dnsrewrite=NOERROR;%s;%s", e.DNSName, e.RecordType, t))
 	}
 	return r
 }
