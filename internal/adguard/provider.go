@@ -185,16 +185,18 @@ func endpointSupported(e *endpoint.Endpoint) bool {
 }
 
 func deserializeToEndpoint(rule string) (*endpoint.Endpoint, error) {
-	// format: "||DNS.NAME^dnsrewrite=NOERROR;RECORD_TYPE;TARGET"
+	// format: "|DNS.NAME^dnsrewrite=NOERROR;RECORD_TYPE;TARGET"
 	p := strings.SplitN(rule, ";", 3)
 	if len(p) != 3 {
 		return nil, errNotManaged
 	}
 	dp := strings.SplitN(p[0], "^", 2)
+	// TODO: we support backward compatibility with the old format, but we should remove it in the future (|| strings.HasPrefix(dp[0], "||"))
 	if len(dp) != 2 {
 		return nil, fmt.Errorf("invalid rule: %s", rule)
 	}
-	d := strings.TrimPrefix(dp[0], "||")
+	// TODO: once we remove backward compatibility, we should remove the replace
+	d := strings.TrimPrefix(strings.Replace(dp[0], "||", "|", 1), "|")
 
 	// see serializeToString for the format
 	r := &endpoint.Endpoint{
@@ -209,8 +211,8 @@ func deserializeToEndpoint(rule string) (*endpoint.Endpoint, error) {
 func serializeToString(e *endpoint.Endpoint) []string {
 	r := []string{}
 	for _, t := range e.Targets {
-		// format: "||DNS.NAME^dnsrewrite=NOERROR;RECORD_TYPE;TARGET"
-		r = append(r, fmt.Sprintf("||%s^$dnsrewrite=NOERROR;%s;%s", e.DNSName, e.RecordType, t))
+		// format: "|DNS.NAME^dnsrewrite=NOERROR;RECORD_TYPE;TARGET"
+		r = append(r, fmt.Sprintf("|%s^$dnsrewrite=NOERROR;%s;%s", e.DNSName, e.RecordType, t))
 	}
 	return r
 }

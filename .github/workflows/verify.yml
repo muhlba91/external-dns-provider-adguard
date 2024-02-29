@@ -37,7 +37,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        go-version: [1.21.x]
+        go-version: [1.22.x]
         golangci-lint-version: [v1.54.2]
 
     steps:
@@ -69,7 +69,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        go-version: [1.21.x]
+        go-version: [1.22.x]
 
     steps:
       - name: Checkout repository
@@ -117,7 +117,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        go-version: [1.21.x]
+        go-version: [1.22.x]
 
     steps:
       - name: Checkout repository

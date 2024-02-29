@@ -139,32 +139,43 @@ func TestDeserializeToEndpoint(t *testing.T) {
 	}{
 		{
 			name:     "A record",
-			text:     "||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
+			text:     "|domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
 			endpoint: &endpoint.Endpoint{DNSName: "domain.com", RecordType: endpoint.RecordTypeA, Targets: []string{"1.1.1.1"}},
 		},
 		{
 			name:     "AAAA record",
-			text:     "||domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1",
+			text:     "|domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1",
 			endpoint: &endpoint.Endpoint{DNSName: "domain.com", RecordType: endpoint.RecordTypeAAAA, Targets: []string{"1111:1111::1"}},
 		},
 		{
 			name:     "TXT record",
-			text:     "||domain.com^$dnsrewrite=NOERROR;TXT;external-dns-txt",
+			text:     "|domain.com^$dnsrewrite=NOERROR;TXT;external-dns-txt",
 			endpoint: &endpoint.Endpoint{DNSName: "domain.com", RecordType: endpoint.RecordTypeTXT, Targets: []string{"external-dns-txt"}},
 		},
 		{
 			name:     "long TXT record",
-			text:     "||domain.com^$dnsrewrite=NOERROR;TXT;\"external-dns-txt; d=abc; v=...\"",
+			text:     "|domain.com^$dnsrewrite=NOERROR;TXT;\"external-dns-txt; d=abc; v=...\"",
 			endpoint: &endpoint.Endpoint{DNSName: "domain.com", RecordType: endpoint.RecordTypeTXT, Targets: []string{"\"external-dns-txt; d=abc; v=...\""}},
 		},
 		{
 			name:     "CNAME record",
-			text:     "||domain.com^$dnsrewrite=NOERROR;CNAME;other.org",
+			text:     "|domain.com^$dnsrewrite=NOERROR;CNAME;other.org",
 			endpoint: &endpoint.Endpoint{DNSName: "domain.com", RecordType: endpoint.RecordTypeCNAME, Targets: []string{"other.org"}},
 		},
 		{
-			name:        "invalid record",
+			name:     "invalid A record",
+			text:     "||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
+			endpoint: &endpoint.Endpoint{DNSName: "domain.com", RecordType: endpoint.RecordTypeA, Targets: []string{"1.1.1.1"}},
+			// expectedErr: true, // TODO: once we removed backward compatibility, we should enable this
+		},
+		{
+			name:        "invalid record 1",
 			text:        "@@||abc.com",
+			expectedErr: true,
+		},
+		{
+			name:        "invalid record 2",
+			text:        "@@|abc.com",
 			expectedErr: true,
 		},
 		{
@@ -197,29 +208,29 @@ func TestSerializeToString(t *testing.T) {
 	}{
 		{
 			name:     "A record",
-			text:     []string{"||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1"},
+			text:     []string{"|domain.com^$dnsrewrite=NOERROR;A;1.1.1.1"},
 			endpoint: &endpoint.Endpoint{DNSName: "domain.com", RecordType: endpoint.RecordTypeA, Targets: []string{"1.1.1.1"}},
 		},
 		{
 			name:     "AAAA record",
-			text:     []string{"||domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1"},
+			text:     []string{"|domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1"},
 			endpoint: &endpoint.Endpoint{DNSName: "domain.com", RecordType: endpoint.RecordTypeAAAA, Targets: []string{"1111:1111::1"}},
 		},
 		{
 			name:     "TXT record",
-			text:     []string{"||domain.com^$dnsrewrite=NOERROR;TXT;external-dns-txt"},
+			text:     []string{"|domain.com^$dnsrewrite=NOERROR;TXT;external-dns-txt"},
 			endpoint: &endpoint.Endpoint{DNSName: "domain.com", RecordType: endpoint.RecordTypeTXT, Targets: []string{"external-dns-txt"}},
 		},
 		{
 			name:     "CNAME record",
-			text:     []string{"||domain.com^$dnsrewrite=NOERROR;CNAME;other.org"},
+			text:     []string{"|domain.com^$dnsrewrite=NOERROR;CNAME;other.org"},
 			endpoint: &endpoint.Endpoint{DNSName: "domain.com", RecordType: endpoint.RecordTypeCNAME, Targets: []string{"other.org"}},
 		},
 		{
 			name: "multiple records",
 			text: []string{
-				"||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
-				"||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
+				"|domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
+				"|domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
 			},
 			endpoint: &endpoint.Endpoint{DNSName: "domain.com", RecordType: endpoint.RecordTypeA, Targets: []string{"1.1.1.1", "2.2.2.2"}},
 		},
@@ -243,10 +254,10 @@ func TestRecords(t *testing.T) {
 			domainFilter: endpoint.DomainFilter{},
 			filteringRules: getFilteringRules{
 				UserRules: []string{
-					"||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
-					"||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
-					"||domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1",
-					"||other.org^$dnsrewrite=NOERROR;A;3.3.3.3",
+					"|domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
+					"|domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
+					"|domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1",
+					"|other.org^$dnsrewrite=NOERROR;A;3.3.3.3",
 				},
 			},
 			endpoints: []*endpoint.Endpoint{
@@ -280,9 +291,9 @@ func TestRecords(t *testing.T) {
 			domainFilter: endpoint.DomainFilter{},
 			filteringRules: getFilteringRules{
 				UserRules: []string{
-					"||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
-					"||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
-					"||domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1",
+					"|domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
+					"|domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
+					"|domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1",
 					"@@||other.org",
 				},
 			},
@@ -310,10 +321,10 @@ func TestRecords(t *testing.T) {
 			domainFilter: endpoint.NewDomainFilter([]string{"domain.com"}),
 			filteringRules: getFilteringRules{
 				UserRules: []string{
-					"||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
-					"||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
-					"||domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1",
-					"||other.org^$dnsrewrite=NOERROR;A;3.3.3.3",
+					"|domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
+					"|domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
+					"|domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1",
+					"|other.org^$dnsrewrite=NOERROR;A;3.3.3.3",
 				},
 			},
 			endpoints: []*endpoint.Endpoint{
@@ -340,7 +351,8 @@ func TestRecords(t *testing.T) {
 			domainFilter: endpoint.DomainFilter{},
 			filteringRules: getFilteringRules{
 				UserRules: []string{
-					"||domain.com$dnsrewrite=NOERROR;A;1.1.1.1 whatever",
+					"|domain.com$dnsrewrite=NOERROR;A;1.1.1.1 whatever",
+					"||domain1.com^$dnsrewrite=NOERROR;A;1.1.1.1",
 				},
 			},
 		},
@@ -385,10 +397,10 @@ func TestApplyChanges(t *testing.T) {
 			hasError:     false,
 			domainFilter: endpoint.DomainFilter{},
 			rules: []string{
-				"||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
-				"||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
-				"||domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1",
-				"||other.org^$dnsrewrite=NOERROR;A;3.3.3.3",
+				"|domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
+				"|domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
+				"|domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1",
+				"|other.org^$dnsrewrite=NOERROR;A;3.3.3.3",
 			},
 			changes: &plan.Changes{
 				Create: []*endpoint.Endpoint{
@@ -422,7 +434,7 @@ func TestApplyChanges(t *testing.T) {
 			hasError:     false,
 			domainFilter: endpoint.DomainFilter{},
 			rules: []string{
-				"||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
+				"|domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
 			},
 			changes: &plan.Changes{
 				UpdateOld: []*endpoint.Endpoint{
@@ -451,7 +463,7 @@ func TestApplyChanges(t *testing.T) {
 			domainFilter: endpoint.DomainFilter{},
 			filteringRules: getFilteringRules{
 				UserRules: []string{
-					"||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
+					"|domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
 				},
 			},
 			rules: []string{},
@@ -473,12 +485,12 @@ func TestApplyChanges(t *testing.T) {
 			domainFilter: endpoint.DomainFilter{},
 			filteringRules: getFilteringRules{
 				UserRules: []string{
-					"||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
-					"||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
+					"|domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
+					"|domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
 				},
 			},
 			rules: []string{
-				"||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
+				"|domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
 			},
 			changes: &plan.Changes{
 				Delete: []*endpoint.Endpoint{
@@ -498,11 +510,11 @@ func TestApplyChanges(t *testing.T) {
 			domainFilter: endpoint.DomainFilter{},
 			filteringRules: getFilteringRules{
 				UserRules: []string{
-					"||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
+					"|domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
 				},
 			},
 			rules: []string{
-				"||domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1",
+				"|domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1",
 			},
 			changes: &plan.Changes{
 				Create: []*endpoint.Endpoint{
@@ -530,8 +542,8 @@ func TestApplyChanges(t *testing.T) {
 			hasError:     false,
 			domainFilter: endpoint.DomainFilter{},
 			rules: []string{
-				"||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
-				"||domain.com^$dnsrewrite=NOERROR;A;3.3.3.3",
+				"|domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
+				"|domain.com^$dnsrewrite=NOERROR;A;3.3.3.3",
 			},
 			changes: &plan.Changes{
 				Create: []*endpoint.Endpoint{
@@ -569,14 +581,16 @@ func TestApplyChanges(t *testing.T) {
 			domainFilter: endpoint.DomainFilter{},
 			filteringRules: getFilteringRules{
 				UserRules: []string{
-					"||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
+					"|domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
 					"@@||other.org",
+					"@@|other.org",
 				},
 			},
 			rules: []string{
-				"||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
-				"||domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1",
+				"|domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
+				"|domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1",
 				"@@||other.org",
+				"@@|other.org",
 			},
 			changes: &plan.Changes{
 				Create: []*endpoint.Endpoint{
@@ -595,7 +609,7 @@ func TestApplyChanges(t *testing.T) {
 			hasError:     false,
 			domainFilter: endpoint.DomainFilter{},
 			rules: []string{
-				"||domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1",
+				"|domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1",
 			},
 			changes: &plan.Changes{
 				Create: []*endpoint.Endpoint{
@@ -622,7 +636,7 @@ func TestApplyChanges(t *testing.T) {
 			domainFilter: endpoint.DomainFilter{},
 			filteringRules: getFilteringRules{
 				UserRules: []string{
-					"||domain.com$dnsrewrite=NOERROR;A;2.2.2.2 whatever",
+					"|domain.com$dnsrewrite=NOERROR;A;2.2.2.2 whatever",
 				},
 			},
 			changes: &plan.Changes{
