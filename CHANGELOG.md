@@ -1,5 +1,51 @@
 # Changelog
 
+## [4.0.0](https://github.com/muhlba91/external-dns-provider-adguard/compare/v3.1.0...v4.0.0) (2024-03-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* new rules syntax - existing rules will be converted
+
+### Bug Fixes
+
+* fixes subdomain handling by introducing a new rules syntax ([d3bf273](https://github.com/muhlba91/external-dns-provider-adguard/commit/d3bf2734223e4c4c939f651c81d4b4a52f8fc12e))
+
+
+### Miscellaneous Chores
+
+* **ci:** adopt release please for v4 ([05b5262](https://github.com/muhlba91/external-dns-provider-adguard/commit/05b5262f0039bc51b27dac57909eb65c5688c175))
+* **deps:** update actions/setup-go action to v5 ([53258a3](https://github.com/muhlba91/external-dns-provider-adguard/commit/53258a3f0813d73fb13d7a6f47fd63303835e12d))
+* **deps:** update anchore/sbom-action action to v0.15.0 ([4f3cd3e](https://github.com/muhlba91/external-dns-provider-adguard/commit/4f3cd3ea1cd27f4cb235ef0d2852464ea03b07fd))
+* **deps:** update anchore/sbom-action action to v0.15.1 ([923a489](https://github.com/muhlba91/external-dns-provider-adguard/commit/923a489321c704b736d291131c495e777c9074ab))
+* **deps:** update anchore/sbom-action action to v0.15.2 ([ab289c9](https://github.com/muhlba91/external-dns-provider-adguard/commit/ab289c96f49fc4e9347fbc0abd5e783f3248a641))
+* **deps:** update anchore/sbom-action action to v0.15.3 ([16e5b02](https://github.com/muhlba91/external-dns-provider-adguard/commit/16e5b02e74cc0583c7ad2eaa332d4b29d1f6612c))
+* **deps:** update anchore/sbom-action action to v0.15.4 ([2545229](https://github.com/muhlba91/external-dns-provider-adguard/commit/25452290217299c19dce399ec7035fab29f8d941))
+* **deps:** update anchore/sbom-action action to v0.15.5 ([9915791](https://github.com/muhlba91/external-dns-provider-adguard/commit/9915791d8c1435ada4d5491ebd8f3b0d2322bd5c))
+* **deps:** update anchore/sbom-action action to v0.15.6 ([141b8b0](https://github.com/muhlba91/external-dns-provider-adguard/commit/141b8b063b54184f696ad19282def326920209ac))
+* **deps:** update anchore/sbom-action action to v0.15.7 ([3cd37b5](https://github.com/muhlba91/external-dns-provider-adguard/commit/3cd37b516bbc032d892d9807eaa4e1540cb2f18c))
+* **deps:** update anchore/sbom-action action to v0.15.8 ([0783b32](https://github.com/muhlba91/external-dns-provider-adguard/commit/0783b32dc0314055830d458bb3026ecf346d01bb))
+* **deps:** update golang.org/x/exp digest to 02704c9 ([0525b07](https://github.com/muhlba91/external-dns-provider-adguard/commit/0525b0706dd026356a2abc122d52ee42669c2537))
+* **deps:** update golang.org/x/exp digest to 0dcbfd6 ([5bc7a38](https://github.com/muhlba91/external-dns-provider-adguard/commit/5bc7a38fc9a69aa18516103acc6d3297d7a50dfa))
+* **deps:** update golang.org/x/exp digest to 1b97071 ([f52c549](https://github.com/muhlba91/external-dns-provider-adguard/commit/f52c54971e091a459df1acaa02c08e930aeb0d96))
+* **deps:** update golang.org/x/exp digest to 2c58cdc ([4754108](https://github.com/muhlba91/external-dns-provider-adguard/commit/47541080949f3342920e542ef6bd24b384c128bc))
+* **deps:** update golang.org/x/exp digest to 6522937 ([de71206](https://github.com/muhlba91/external-dns-provider-adguard/commit/de712068b9b82d9b7b8439c11011541ebb1c4b89))
+* **deps:** update golang.org/x/exp digest to 73b9e39 ([49111d1](https://github.com/muhlba91/external-dns-provider-adguard/commit/49111d1badc21ad9f00eaf25cef04e4d8064b9ae))
+* **deps:** update golang.org/x/exp digest to 814bf88 ([5eb7e15](https://github.com/muhlba91/external-dns-provider-adguard/commit/5eb7e1532d2d0573b2c8d9bbd36f41094feb3fe4))
+* **deps:** update golang.org/x/exp digest to aacd6d4 ([d6968a0](https://github.com/muhlba91/external-dns-provider-adguard/commit/d6968a0eb79ad700fd2be8f4bc88ac6d75424a7e))
+* **deps:** update golang.org/x/exp digest to be819d1 ([8b4bef0](https://github.com/muhlba91/external-dns-provider-adguard/commit/8b4bef0e6d3c38950f42e3e6579fc9c83868bb6a))
+* **deps:** update golang.org/x/exp digest to db7319d ([08077cc](https://github.com/muhlba91/external-dns-provider-adguard/commit/08077cc4fcfe1aac30a4276345cb211bf8be1d51))
+* **deps:** update golang.org/x/exp digest to dc181d7 ([2e192c1](https://github.com/muhlba91/external-dns-provider-adguard/commit/2e192c14dc9079572e1f9b87d7adcffab61a7c3e))
+* **deps:** update golang.org/x/exp digest to ec58324 ([d197313](https://github.com/muhlba91/external-dns-provider-adguard/commit/d19731334e7a64f1930f2d4b67d19747f1bffd32))
+* **deps:** update golang.org/x/exp digest to f3f8817 ([433160f](https://github.com/muhlba91/external-dns-provider-adguard/commit/433160f63c5ccee5d56bd319901b2c9df86d6969))
+* **deps:** update golangci/golangci-lint-action action to v4 ([a150d20](https://github.com/muhlba91/external-dns-provider-adguard/commit/a150d20d2735749c530fd770d691f22d2e534275))
+* **deps:** update google-github-actions/release-please-action action to v4 ([aa61995](https://github.com/muhlba91/external-dns-provider-adguard/commit/aa61995b64ca00d01993785a061bdfd9f0321aa3))
+* **deps:** update module github.com/go-chi/chi/v5 to v5.0.11 ([51209c2](https://github.com/muhlba91/external-dns-provider-adguard/commit/51209c266b5b2abd3d776468d05532ff38e5460f))
+* **deps:** update module github.com/go-chi/chi/v5 to v5.0.12 ([a47726d](https://github.com/muhlba91/external-dns-provider-adguard/commit/a47726dc3e13245ad0f2e63fdb5ad90b0c1e5450))
+* **deps:** update module github.com/stretchr/testify to v1.9.0 ([fed5a11](https://github.com/muhlba91/external-dns-provider-adguard/commit/fed5a1155d7e8a987710fa84d0470aa102ef941d))
+* **deps:** update sigstore/cosign-installer action to v3.3.0 ([520316d](https://github.com/muhlba91/external-dns-provider-adguard/commit/520316d9626c54c3b0b2a33c001b0c7adee6e1e6))
+* **deps:** update sigstore/cosign-installer action to v3.4.0 ([df22d7e](https://github.com/muhlba91/external-dns-provider-adguard/commit/df22d7e72bf609dcda43571d4bd30ffe03d09315))
+
 ## [3.1.0](https://github.com/muhlba91/external-dns-provider-adguard/compare/v3.0.0...v3.1.0) (2023-11-11)
 
 
