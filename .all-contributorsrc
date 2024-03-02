@@ -28,6 +28,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "gabe565",
+      "name": "Gabe Cook",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7717888?v=4",
+      "profile": "https://github.com/gabe565",
+      "contributions": [
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,
