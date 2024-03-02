@@ -65,8 +65,6 @@ However, rules **not matching** above format, for example, `|domain.to.block`, *
 
 ### v4 to v5
 
-**Unreleased as of now. Release TBD!**
-
 In `v5` removes the automated migration from the old rules syntax (`v3`) to the new syntax introduced in `v4`.
 
 Attention: if you skip the upgrade to `v4`, old rules will be dangling and will cause issues.
