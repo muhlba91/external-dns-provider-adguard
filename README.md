@@ -63,15 +63,25 @@ However, rules **not matching** above format, for example, `|domain.to.block`, *
 > **If** an **upgrade path** between version is **listed here**, please make sure to **follow** those paths **without skipping a version**!
 > Otherwise, the correct behaviour cannot be guaranteed, resulting in possible inconsistencies or errors.
 
+### v4 to v5
+
+**Unreleased as of now. Release TBD!**
+
+In `v5` removes the automated migration from the old rules syntax (`v3`) to the new syntax introduced in `v4`.
+
+Attention: if you skip the upgrade to `v4`, old rules will be dangling and will cause issues.
+
 ### v3 to v4
 
 In `v3` the rule format was `||DNS.NAME^dnsrewrite=NOERROR;RECORD_TYPE;TARGET`.
 
 In `v4` this was changed to `|DNS.NAME^dnsrewrite=NOERROR;RECORD_TYPE;TARGET` to solve issues with handling subdomains.
 
-`v4` also introduces an automated migration path from the old syntax to the new one.
+`v4` also introduces an automated migration from the old syntax to the new one.
 To achieve this the provider reads the old syntax when updating rules but ignores them when providing the existing rules to ExternalDNS.
 In fact, ExternalDNS tries to create those rules and the provider will re-write those in AdGuard using the new syntax.
+
+Please make sure `v4` runs for some time in your cluster to ensure the migration of all old rules.
 
 ---
 
