@@ -67,7 +67,7 @@ func (p *Provider) ApplyChanges(ctx context.Context, changes *plan.Changes) erro
 
 	// collect all non-managed rules and existing endpoints managed by external-dns
 	for _, r := range or {
-		ep, err := deserializeToEndpoint(r, true)
+		ep, err := deserializeToEndpoint(r)
 		if err != nil {
 			// rules not managed by external-dns are kept
 			if errors.Is(err, errNotManaged) {
@@ -86,8 +86,7 @@ func (p *Provider) ApplyChanges(ctx context.Context, changes *plan.Changes) erro
 	}
 
 	// delete all records to be updated or deleted
-	// TODO: remove appending changes.Create once we remove backward compatibility
-	for _, dep := range append(changes.Create, append(changes.UpdateOld, changes.Delete...)...) {
+	for _, dep := range append(changes.UpdateOld, changes.Delete...) {
 		epk := dep.DNSName + dep.RecordType
 		if ep, ok := eps[epk]; ok {
 			for _, t := range dep.Targets {
@@ -147,7 +146,7 @@ func (p *Provider) Records(ctx context.Context) ([]*endpoint.Endpoint, error) {
 	// endpoints are referenced by dns name and record type
 	eps := make(map[string]*endpoint.Endpoint)
 	for _, rule := range resp {
-		ep, err := deserializeToEndpoint(rule, false)
+		ep, err := deserializeToEndpoint(rule)
 		if err != nil {
 			// unmanaged rules are ignored
 			if err == errNotManaged {
@@ -185,22 +184,20 @@ func endpointSupported(e *endpoint.Endpoint) bool {
 		e.RecordType == endpoint.RecordTypeMX
 }
 
-func deserializeToEndpoint(rule string, migration bool) (*endpoint.Endpoint, error) {
+func deserializeToEndpoint(rule string) (*endpoint.Endpoint, error) {
 	// format: "|DNS.NAME^dnsrewrite=NOERROR;RECORD_TYPE;TARGET"
 	p := strings.SplitN(rule, ";", 3)
 	if len(p) != 3 {
 		return nil, errNotManaged
 	}
 	dp := strings.SplitN(p[0], "^", 2)
-	// TODO: we support backward compatibility with the old format, but we should remove it in the future (remove !migration)
-	if !migration && strings.HasPrefix(dp[0], "||") {
+	if strings.HasPrefix(dp[0], "||") {
 		return nil, errNotManaged
 	}
 	if len(dp) != 2 {
 		return nil, fmt.Errorf("invalid rule: %s", rule)
 	}
-	// TODO: once we remove backward compatibility, we should remove the replace
-	d := strings.TrimPrefix(strings.Replace(dp[0], "||", "|", 1), "|")
+	d := strings.TrimPrefix(dp[0], "|")
 
 	// see serializeToString for the format
 	r := &endpoint.Endpoint{
