@@ -182,41 +182,16 @@ func TestDeserializeToEndpoint(t *testing.T) {
 			text:        "@@||abc.com",
 			expectedErr: true,
 		},
-	}
-
-	for i, tc := range testCases {
-		t.Run(fmt.Sprintf("%d. %s", i+1, tc.name), func(t *testing.T) {
-			ep, err := deserializeToEndpoint(tc.text, false)
-			if tc.expectedErr {
-				require.Error(t, err)
-			} else {
-				require.NoError(t, err)
-				require.Equal(t, tc.endpoint, ep)
-			}
-		})
-	}
-}
-
-// TODO: remove this once we removed backward compatibility
-func TestDeserializeToEndpointMigration(t *testing.T) {
-	log.SetLevel(log.DebugLevel)
-
-	testCases := []struct {
-		name        string
-		text        string
-		endpoint    *endpoint.Endpoint
-		expectedErr bool
-	}{
 		{
-			name:     "migration A record",
-			text:     "||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
-			endpoint: &endpoint.Endpoint{DNSName: "domain.com", RecordType: endpoint.RecordTypeA, Targets: []string{"1.1.1.1"}},
+			name:        "migration A record",
+			text:        "||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
+			expectedErr: true,
 		},
 	}
 
 	for i, tc := range testCases {
 		t.Run(fmt.Sprintf("%d. %s", i+1, tc.name), func(t *testing.T) {
-			ep, err := deserializeToEndpoint(tc.text, true)
+			ep, err := deserializeToEndpoint(tc.text)
 			if tc.expectedErr {
 				require.Error(t, err)
 			} else {
@@ -488,49 +463,7 @@ func TestApplyChanges(t *testing.T) {
 			},
 		},
 		{
-			name:         "valid create of existing resources",
-			hasError:     false,
-			domainFilter: endpoint.DomainFilter{},
-			filteringRules: getFilteringRules{
-				UserRules: []string{
-					"|domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
-				},
-			},
-			rules: []string{
-				"|domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
-				"|domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
-				"|domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1",
-				"|other.org^$dnsrewrite=NOERROR;A;3.3.3.3",
-			},
-			changes: &plan.Changes{
-				Create: []*endpoint.Endpoint{
-					{
-						DNSName:    "domain.com",
-						RecordType: endpoint.RecordTypeA,
-						Targets: []string{
-							"1.1.1.1",
-							"2.2.2.2",
-						},
-					},
-					{
-						DNSName:    "domain.com",
-						RecordType: endpoint.RecordTypeAAAA,
-						Targets: []string{
-							"1111:1111::1",
-						},
-					},
-					{
-						DNSName:    "other.org",
-						RecordType: endpoint.RecordTypeA,
-						Targets: []string{
-							"3.3.3.3",
-						},
-					},
-				},
-			},
-		},
-		{
-			name:         "valid create of existing resources with old format", // TODO: fix once we removed backward compatibility
+			name:         "create of existing resources with old format",
 			hasError:     false,
 			domainFilter: endpoint.DomainFilter{},
 			filteringRules: getFilteringRules{
@@ -539,6 +472,7 @@ func TestApplyChanges(t *testing.T) {
 				},
 			},
 			rules: []string{
+				"||domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
 				"|domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
 				"|domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
 				"|domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1",
@@ -800,7 +734,7 @@ func TestApplyChanges(t *testing.T) {
 			},
 		},
 		{
-			name:         "update same rule with old rule format", // TODO: fix this test case once we removed backward compatibility
+			name:         "update same rule with old rule format",
 			hasError:     false,
 			domainFilter: endpoint.DomainFilter{},
 			filteringRules: getFilteringRules{
@@ -809,6 +743,7 @@ func TestApplyChanges(t *testing.T) {
 				},
 			},
 			rules: []string{
+				"||domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
 				"|domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
 			},
 			changes: &plan.Changes{
