@@ -1,5 +1,16 @@
 # Changelog
 
+## [5.0.0](https://github.com/muhlba91/external-dns-provider-adguard/compare/v4.0.0...v5.0.0) (2024-03-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* removes the migration path to the new rules syntax
+
+### Features
+
+* deprecate migration from the old rules syntax to the new syntax ([4afa607](https://github.com/muhlba91/external-dns-provider-adguard/commit/4afa6071ede1327eafaeee975bcf855a53b0cb9e))
+
 ## [4.0.0](https://github.com/muhlba91/external-dns-provider-adguard/compare/v3.1.0...v4.0.0) (2024-03-02)
 
 
