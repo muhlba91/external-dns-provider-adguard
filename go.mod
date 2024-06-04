@@ -10,7 +10,7 @@ require (
 	github.com/go-chi/chi/v5 v5.0.12
 	github.com/sirupsen/logrus v1.9.3
 	github.com/stretchr/testify v1.9.0
-	golang.org/x/exp v0.0.0-20240531132922-fd00a4e0eefc
+	golang.org/x/exp v0.0.0-20240604190554-fc45aab8b7f8
 	sigs.k8s.io/external-dns v0.14.2
 )
 
