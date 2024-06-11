@@ -1,5 +1,38 @@
 # Changelog
 
+## [5.1.0](https://github.com/muhlba91/external-dns-provider-adguard/compare/v5.0.1...v5.1.0) (2024-06-11)
+
+
+### Bug Fixes
+
+* cleanup go modules ([37d51da](https://github.com/muhlba91/external-dns-provider-adguard/commit/37d51daf262631d9c95e53de220f63e1edabdd27))
+* fix goreleaser update to v2 ([8780139](https://github.com/muhlba91/external-dns-provider-adguard/commit/878013934823437bad615dfb4b69eab7bf2d19dd))
+
+
+### Miscellaneous Chores
+
+* **deps:** update actions/checkout digest to 0ad4b8f ([9533e65](https://github.com/muhlba91/external-dns-provider-adguard/commit/9533e650041ea8aac85fb476a7c1f9357887ca5b))
+* **deps:** update actions/checkout digest to 0ad4b8f ([185e6b6](https://github.com/muhlba91/external-dns-provider-adguard/commit/185e6b60f66447c88aa37de9053b16898e6e5635))
+* **deps:** update actions/checkout digest to 1d96c77 ([9bea625](https://github.com/muhlba91/external-dns-provider-adguard/commit/9bea6255454dafd383ebbe322088bf487670b1e2))
+* **deps:** update actions/checkout digest to 44c2b7a ([c202512](https://github.com/muhlba91/external-dns-provider-adguard/commit/c2025125ad20fa2b7302ff82f9526b989cf18d29))
+* **deps:** update actions/checkout digest to a5ac7e5 ([defc7ea](https://github.com/muhlba91/external-dns-provider-adguard/commit/defc7ea58d47e09470a48dca1dd8f93ca7a18fa4))
+* **deps:** update anchore/sbom-action action to v0.15.11 ([edd07b0](https://github.com/muhlba91/external-dns-provider-adguard/commit/edd07b057bd621215d16de2279fad1c4a30ee803))
+* **deps:** update anchore/sbom-action action to v0.16.0 ([764f274](https://github.com/muhlba91/external-dns-provider-adguard/commit/764f27488b1057b5b39f0688c1f4a30b71ca132b))
+* **deps:** update dependency go to v1.22.3 ([d5bea96](https://github.com/muhlba91/external-dns-provider-adguard/commit/d5bea96978cc287c0a3e5120070f726e01b838b8))
+* **deps:** update dependency go to v1.22.4 ([268142c](https://github.com/muhlba91/external-dns-provider-adguard/commit/268142c7ca596585d2204ebd20ea25a53131bceb))
+* **deps:** update golang.org/x/exp digest to 23cca88 ([74d42ce](https://github.com/muhlba91/external-dns-provider-adguard/commit/74d42cedae203154527b166861f0dbb2e028ff4d))
+* **deps:** update golang.org/x/exp digest to 404ba88 ([8dc0d41](https://github.com/muhlba91/external-dns-provider-adguard/commit/8dc0d41332efe9f05a66cea155c2c18f74ec410a))
+* **deps:** update golang.org/x/exp digest to 4c93da0 ([3a436ca](https://github.com/muhlba91/external-dns-provider-adguard/commit/3a436ca2ebdffe08caf41587c5b907add3bb78db))
+* **deps:** update golang.org/x/exp digest to fc45aab ([2c1cdf0](https://github.com/muhlba91/external-dns-provider-adguard/commit/2c1cdf0538a23738b1bd46e9325a343b394b7bbe))
+* **deps:** update golang.org/x/exp digest to fd00a4e ([af2d4a2](https://github.com/muhlba91/external-dns-provider-adguard/commit/af2d4a2cf94114a6d962ff5da03a5e1050de4fed))
+* **deps:** update golangci/golangci-lint-action action to v5 ([6ab5bff](https://github.com/muhlba91/external-dns-provider-adguard/commit/6ab5bff0404a143a8a2f9af94d4a50a5114ebeb9))
+* **deps:** update golangci/golangci-lint-action action to v6 ([f2f1ec4](https://github.com/muhlba91/external-dns-provider-adguard/commit/f2f1ec4814338193cd36d055225f77f108acc368))
+* **deps:** update goreleaser/goreleaser-action action to v6 ([98be643](https://github.com/muhlba91/external-dns-provider-adguard/commit/98be643542cbf059e1f3fa7654169478243d54ee))
+* **deps:** update module github.com/caarlos0/env/v10 to v11 ([6c1b2e3](https://github.com/muhlba91/external-dns-provider-adguard/commit/6c1b2e31e4db3bbd50df51e55d8ee0ff32ec8b35))
+* **deps:** update module golang.org/x/exp to v0.0.0-20240506185415-9bf2ced13842 ([4813c99](https://github.com/muhlba91/external-dns-provider-adguard/commit/4813c99b03b7a9ae1c4914c086fed0e4709dff9e))
+* **deps:** update module sigs.k8s.io/external-dns to v0.14.2 ([ee31e51](https://github.com/muhlba91/external-dns-provider-adguard/commit/ee31e513143849a585095acacb77b6ae816d817a))
+* release 5.1.0 ([35f5f4d](https://github.com/muhlba91/external-dns-provider-adguard/commit/35f5f4d6b9ec44289237baa5ace0cce7d2013420))
+
 ## [5.0.1](https://github.com/muhlba91/external-dns-provider-adguard/compare/v5.0.0...v5.0.1) (2024-04-21)
 
 
