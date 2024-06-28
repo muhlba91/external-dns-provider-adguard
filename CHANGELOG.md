@@ -1,5 +1,16 @@
 # Changelog
 
+## [5.1.1](https://github.com/muhlba91/external-dns-provider-adguard/compare/v5.1.0...v5.1.1) (2024-06-28)
+
+
+### Miscellaneous Chores
+
+* **deps:** update actions/checkout digest to 692973e ([523c2fa](https://github.com/muhlba91/external-dns-provider-adguard/commit/523c2fa247d717416f143abf880f5f54c9b3a7a1))
+* **deps:** update golang.org/x/exp digest to 7f521ea ([2301d99](https://github.com/muhlba91/external-dns-provider-adguard/commit/2301d999cd0f31cc5514a8f533ca5bc0c960ce80))
+* **deps:** update module github.com/go-chi/chi/v5 to v5.0.13 ([932b275](https://github.com/muhlba91/external-dns-provider-adguard/commit/932b27525415cb39683b6718fc98556349d4af17))
+* **deps:** update module github.com/go-chi/chi/v5 to v5.0.14 ([8cb84ad](https://github.com/muhlba91/external-dns-provider-adguard/commit/8cb84ade7587eda776c704830a01278dacd2e8ef))
+* **deps:** update module github.com/go-chi/chi/v5 to v5.1.0 ([edd8b68](https://github.com/muhlba91/external-dns-provider-adguard/commit/edd8b680185e7126470d6204120ec5dda85ba5b1))
+
 ## [5.1.0](https://github.com/muhlba91/external-dns-provider-adguard/compare/v5.0.1...v5.1.0) (2024-06-11)
 
 
