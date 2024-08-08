@@ -1,5 +1,28 @@
 # Changelog
 
+## [5.1.1](https://github.com/muhlba91/external-dns-provider-adguard/compare/v5.1.0...v5.1.1) (2024-08-08)
+
+
+### Miscellaneous Chores
+
+* **ci:** add attestations ([22fa1ff](https://github.com/muhlba91/external-dns-provider-adguard/commit/22fa1ff171a6a8ee4e1ab722f5c0f0d2d9203ab8))
+* **ci:** add attestations for binaries ([e501710](https://github.com/muhlba91/external-dns-provider-adguard/commit/e501710b26612102e63073a579bf584f4dd333f4))
+* **ci:** add permissions for attestations ([134aee0](https://github.com/muhlba91/external-dns-provider-adguard/commit/134aee07730650262b14df773251d9240f993cfd))
+* **deps:** update actions/checkout digest to 692973e ([523c2fa](https://github.com/muhlba91/external-dns-provider-adguard/commit/523c2fa247d717416f143abf880f5f54c9b3a7a1))
+* **deps:** update anchore/sbom-action action to v0.16.1 ([c2c3275](https://github.com/muhlba91/external-dns-provider-adguard/commit/c2c327545bbac063b299c0958cb3371f364e1f93))
+* **deps:** update anchore/sbom-action action to v0.17.0 ([e9be1e7](https://github.com/muhlba91/external-dns-provider-adguard/commit/e9be1e746f28b39aa70fbc14d3041b0ca1f53a0e))
+* **deps:** update dependencies ([f8b2bfb](https://github.com/muhlba91/external-dns-provider-adguard/commit/f8b2bfbb5dd7de07903f8eb7c4c5e25288482e68))
+* **deps:** update dependency go to v1.22.5 ([83e87f0](https://github.com/muhlba91/external-dns-provider-adguard/commit/83e87f0c85e059a96b8dea917869913813e68cbf))
+* **deps:** update dependency go to v1.22.6 ([894eb2a](https://github.com/muhlba91/external-dns-provider-adguard/commit/894eb2aec22219b4e8b419ce5f85b389c0df8b2d))
+* **deps:** update golang.org/x/exp digest to 46b0784 ([3b45763](https://github.com/muhlba91/external-dns-provider-adguard/commit/3b45763b685110535ec5cf10fede72af2e21c867))
+* **deps:** update golang.org/x/exp digest to 7f521ea ([2301d99](https://github.com/muhlba91/external-dns-provider-adguard/commit/2301d999cd0f31cc5514a8f533ca5bc0c960ce80))
+* **deps:** update golang.org/x/exp digest to 8a7402a ([bfc898e](https://github.com/muhlba91/external-dns-provider-adguard/commit/bfc898ee27a1e0205d24d8d0e9588547a633bf93))
+* **deps:** update golang.org/x/exp digest to e3f2596 ([a33eeca](https://github.com/muhlba91/external-dns-provider-adguard/commit/a33eeca7094b2303bbecbd154d37c478a821f31d))
+* **deps:** update module github.com/go-chi/chi/v5 to v5.0.13 ([932b275](https://github.com/muhlba91/external-dns-provider-adguard/commit/932b27525415cb39683b6718fc98556349d4af17))
+* **deps:** update module github.com/go-chi/chi/v5 to v5.0.14 ([8cb84ad](https://github.com/muhlba91/external-dns-provider-adguard/commit/8cb84ade7587eda776c704830a01278dacd2e8ef))
+* **deps:** update module github.com/go-chi/chi/v5 to v5.1.0 ([edd8b68](https://github.com/muhlba91/external-dns-provider-adguard/commit/edd8b680185e7126470d6204120ec5dda85ba5b1))
+* **deps:** update sigstore/cosign-installer action to v3.6.0 ([6bec41b](https://github.com/muhlba91/external-dns-provider-adguard/commit/6bec41b0c9881d2da54acaddb95337fb8ac76bd6))
+
 ## [5.1.0](https://github.com/muhlba91/external-dns-provider-adguard/compare/v5.0.1...v5.1.0) (2024-06-11)
 
 
