@@ -33,6 +33,9 @@ jobs:
     name: Publish Provider
     needs:
       - release
+    permissions:
+      id-token: write
+      attestations: write
     strategy:
       max-parallel: 4
       matrix:
