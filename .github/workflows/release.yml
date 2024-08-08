@@ -86,14 +86,12 @@ jobs:
         id: image_metadata
         env:
           ARTIFACTS: ${{ steps.goreleaser.outputs.artifacts }}
-        continue-on-error: true # Attestaions is in alpha stage
       - name: Publish Container Attestations
         uses: actions/attest-build-provenance@v1
         with:
           subject-name: ${{ steps.image_metadata.outputs.name }}
           subject-digest: ${{ steps.image_metadata.outputs.digest }}
           push-to-registry: true
-        continue-on-error: true # Attestaions is in alpha stage
       - name: Publish Attestations
         uses: actions/attest-build-provenance@v1
         with:
@@ -103,4 +101,3 @@ jobs:
             dist/*_checksums.txt
             dist/*.sig
             dist/*.pem
-        continue-on-error: true # Attestaions is in alpha stage
