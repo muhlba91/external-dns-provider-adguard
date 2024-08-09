@@ -143,6 +143,11 @@ func TestDeserializeToEndpoint(t *testing.T) {
 			endpoint: &endpoint.Endpoint{DNSName: "domain.com", RecordType: endpoint.RecordTypeA, Targets: []string{"1.1.1.1"}},
 		},
 		{
+			name:     "A record with flags",
+			text:     "|domain.com^$dnsrewrite=NOERROR;A;1.1.1.1,important",
+			endpoint: &endpoint.Endpoint{DNSName: "domain.com", RecordType: endpoint.RecordTypeA, Targets: []string{"1.1.1.1"}},
+		},
+		{
 			name:     "AAAA record",
 			text:     "|domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1",
 			endpoint: &endpoint.Endpoint{DNSName: "domain.com", RecordType: endpoint.RecordTypeAAAA, Targets: []string{"1111:1111::1"}},
@@ -209,6 +214,7 @@ func TestSerializeToString(t *testing.T) {
 		name     string
 		text     []string
 		endpoint *endpoint.Endpoint
+		flags    string
 	}{
 		{
 			name:     "A record",
@@ -242,7 +248,7 @@ func TestSerializeToString(t *testing.T) {
 
 	for i, tc := range testCases {
 		t.Run(fmt.Sprintf("%d. %s", i+1, tc.name), func(t *testing.T) {
-			rr := serializeToString(tc.endpoint)
+			rr := serializeToString(tc.endpoint, tc.flags)
 			require.Equal(t, tc.text, rr)
 		})
 	}
@@ -832,8 +838,9 @@ func TestApplyChanges(t *testing.T) {
 				t:        t,
 			}
 			testProvider = &Provider{
-				client:       mockHTTPClient,
-				domainFilter: tc.domainFilter,
+				Configuration: &Configuration{},
+				client:        mockHTTPClient,
+				domainFilter:  tc.domainFilter,
 			}
 
 			err := testProvider.ApplyChanges(context.TODO(), tc.changes)

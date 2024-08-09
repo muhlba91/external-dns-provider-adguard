@@ -63,6 +63,12 @@ However, rules **not matching** above format, for example, `|domain.to.block`, *
 > **If** an **upgrade path** between version is **listed here**, please make sure to **follow** those paths **without skipping a version**!
 > Otherwise, the correct behaviour cannot be guaranteed, resulting in possible inconsistencies or errors.
 
+### v5 to v6
+
+`v6` introduces the `ADGUARD_SET_IMPORTANT_FLAG` environment variable to set the `important` flag for AdGuard rules. This is enabled by default.
+
+To keep the previous behaviour of `v5`, set `ADGUARD_SET_IMPORTANT_FLAG` to `false`.
+
 ### v4 to v5
 
 In `v5` removes the automated migration from the old rules syntax (`v3`) to the new syntax introduced in `v4`.

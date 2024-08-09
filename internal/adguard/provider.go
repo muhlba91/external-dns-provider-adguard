@@ -18,6 +18,8 @@ import (
 type Provider struct {
 	provider.BaseProvider
 
+	Configuration *Configuration
+
 	client       Client
 	domainFilter endpoint.DomainFilter
 }
@@ -44,8 +46,9 @@ func NewAdguardProvider(domainFilter endpoint.DomainFilter, config *Configuratio
 	}
 
 	p := &Provider{
-		client:       c,
-		domainFilter: domainFilter,
+		Configuration: config,
+		client:        c,
+		domainFilter:  domainFilter,
 	}
 
 	return p, nil
@@ -128,7 +131,7 @@ func (p *Provider) ApplyChanges(ctx context.Context, changes *plan.Changes) erro
 
 	// convert endpoints to rules
 	for _, e := range eps {
-		s := serializeToString(e)
+		s := serializeToString(e, p.Configuration.DNSEntryFlags())
 		rr = append(rr, s...)
 	}
 
@@ -198,22 +201,23 @@ func deserializeToEndpoint(rule string) (*endpoint.Endpoint, error) {
 		return nil, fmt.Errorf("invalid rule: %s", rule)
 	}
 	d := strings.TrimPrefix(dp[0], "|")
+	t := strings.Split(p[2], ",")
 
 	// see serializeToString for the format
 	r := &endpoint.Endpoint{
 		RecordType: p[1],
 		DNSName:    d,
-		Targets:    endpoint.Targets{p[2]},
+		Targets:    endpoint.Targets{t[0]},
 	}
 
 	return r, nil
 }
 
-func serializeToString(e *endpoint.Endpoint) []string {
+func serializeToString(e *endpoint.Endpoint, f string) []string {
 	r := []string{}
 	for _, t := range e.Targets {
-		// format: "|DNS.NAME^dnsrewrite=NOERROR;RECORD_TYPE;TARGET"
-		r = append(r, fmt.Sprintf("|%s^$dnsrewrite=NOERROR;%s;%s", e.DNSName, e.RecordType, t))
+		// format: "|DNS.NAME^dnsrewrite=NOERROR;RECORD_TYPE;TARGET(,additional_flags)"
+		r = append(r, fmt.Sprintf("|%s^$dnsrewrite=NOERROR;%s;%s%s", e.DNSName, e.RecordType, t, f))
 	}
 	return r
 }
