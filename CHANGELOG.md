@@ -1,5 +1,22 @@
 # Changelog
 
+## [6.0.0](https://github.com/muhlba91/external-dns-provider-adguard/compare/v5.1.2...v6.0.0) (2024-08-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* add the important flag by default (ADGUARD_SET_IMPORTANT_FLAG = true)
+
+### Features
+
+* add the important flag to entries; related to [#118](https://github.com/muhlba91/external-dns-provider-adguard/issues/118) ([5a9ab31](https://github.com/muhlba91/external-dns-provider-adguard/commit/5a9ab31a2eac8697e9f3b9bf5429cd3c6611bba8))
+
+
+### Miscellaneous Chores
+
+* **ci:** move attestations to stable ([222c4e1](https://github.com/muhlba91/external-dns-provider-adguard/commit/222c4e1129e7440ff840e812a93a46b3956337be))
+* **deps:** update golang.org/x/exp digest to 0cdaa3a ([e1cc63a](https://github.com/muhlba91/external-dns-provider-adguard/commit/e1cc63a0117f1fc123889ed6a57c20679b93d613))
+
 ## [5.1.2](https://github.com/muhlba91/external-dns-provider-adguard/compare/v5.1.1...v5.1.2) (2024-08-08)
 
 
