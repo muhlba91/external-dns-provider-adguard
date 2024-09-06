@@ -65,13 +65,11 @@ func (p *Webhook) headerCheck(isContentType bool, w http.ResponseWriter, r *http
 		w.Header().Set(contentTypeHeader, contentTypePlaintext)
 		w.WriteHeader(http.StatusNotAcceptable)
 
-		msg := "client must provide "
-		if isContentType {
-			msg += "a content type"
-		} else {
-			msg += "an accept header"
+		msg := "a content type"
+		if !isContentType {
+			msg = "an accept header"
 		}
-		err := fmt.Errorf(msg)
+		err := fmt.Errorf("client must provide %s", msg)
 
 		_, writeErr := fmt.Fprint(w, err.Error())
 		if writeErr != nil {
@@ -208,16 +206,10 @@ func (p *Webhook) Negotiate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	b, err := p.provider.GetDomainFilter().MarshalJSON()
+	w.Header().Set(contentTypeHeader, string(mediaTypeVersion1))
+	err := json.NewEncoder(w).Encode(p.provider.GetDomainFilter())
 	if err != nil {
 		log.Errorf("failed to marshal domain filter, request method: %s, request path: %s", r.Method, r.URL.Path)
-		w.WriteHeader(http.StatusInternalServerError)
-		return
-	}
-
-	w.Header().Set(contentTypeHeader, string(mediaTypeVersion1))
-	if _, writeError := w.Write(b); writeError != nil {
-		requestLog(r).WithField(logFieldError, writeError).Error("error writing response")
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}

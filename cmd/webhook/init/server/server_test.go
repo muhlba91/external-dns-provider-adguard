@@ -543,6 +543,6 @@ func (d *MockProvider) AdjustEndpoints(endpoints []*endpoint.Endpoint) ([]*endpo
 	return d.testCase.returnAdjustedEndpoints, nil
 }
 
-func (d *MockProvider) GetDomainFilter() endpoint.DomainFilter {
+func (d *MockProvider) GetDomainFilter() endpoint.DomainFilterInterface {
 	return d.testCase.returnDomainFilter
 }
