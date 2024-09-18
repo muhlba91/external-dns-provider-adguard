@@ -158,6 +158,11 @@ func TestDeserializeToEndpoint(t *testing.T) {
 			endpoint: &endpoint.Endpoint{DNSName: "domain.com", RecordType: endpoint.RecordTypeTXT, Targets: []string{"external-dns-txt"}},
 		},
 		{
+			name:     "TXT owner record",
+			text:     "|whoami.local^$dnsrewrite=NOERROR;TXT;heritage=external-dns,external-dns/owner=default,external-dns/resource=httproute/default/whoami-http-route,important",
+			endpoint: &endpoint.Endpoint{DNSName: "whoami.local", RecordType: endpoint.RecordTypeTXT, Targets: []string{"heritage=external-dns,external-dns/owner=default,external-dns/resource=httproute/default/whoami-http-route"}},
+		},
+		{
 			name:     "long TXT record",
 			text:     "|domain.com^$dnsrewrite=NOERROR;TXT;\"external-dns-txt; d=abc; v=...\"",
 			endpoint: &endpoint.Endpoint{DNSName: "domain.com", RecordType: endpoint.RecordTypeTXT, Targets: []string{"\"external-dns-txt; d=abc; v=...\""}},
@@ -268,6 +273,7 @@ func TestRecords(t *testing.T) {
 					"|domain.com^$dnsrewrite=NOERROR;A;2.2.2.2",
 					"|domain.com^$dnsrewrite=NOERROR;AAAA;1111:1111::1",
 					"|other.org^$dnsrewrite=NOERROR;A;3.3.3.3",
+					"|whoami.local^$dnsrewrite=NOERROR;TXT;heritage=external-dns,external-dns/owner=default,external-dns/resource=httproute/default/whoami-http-route,important",
 				},
 			},
 			endpoints: []*endpoint.Endpoint{
@@ -291,6 +297,13 @@ func TestRecords(t *testing.T) {
 					RecordType: endpoint.RecordTypeA,
 					Targets: []string{
 						"3.3.3.3",
+					},
+				},
+				{
+					DNSName:    "whoami.local",
+					RecordType: endpoint.RecordTypeTXT,
+					Targets: []string{
+						"heritage=external-dns,external-dns/owner=default,external-dns/resource=httproute/default/whoami-http-route",
 					},
 				},
 			},

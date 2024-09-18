@@ -188,7 +188,7 @@ func endpointSupported(e *endpoint.Endpoint) bool {
 }
 
 func deserializeToEndpoint(rule string) (*endpoint.Endpoint, error) {
-	// format: "|DNS.NAME^dnsrewrite=NOERROR;RECORD_TYPE;TARGET"
+	// format: "|DNS.NAME^dnsrewrite=NOERROR;RECORD_TYPE;TARGET,important"
 	p := strings.SplitN(rule, ";", 3)
 	if len(p) != 3 {
 		return nil, errNotManaged
@@ -200,14 +200,21 @@ func deserializeToEndpoint(rule string) (*endpoint.Endpoint, error) {
 	if len(dp) != 2 {
 		return nil, fmt.Errorf("invalid rule: %s", rule)
 	}
+
 	d := strings.TrimPrefix(dp[0], "|")
-	t := strings.Split(p[2], ",")
+
+	// TXT records can contain commas, so we need to ensure we don't split them incorrectly
+	t := p[2]
+	lc := strings.LastIndex(p[2], ",")
+	if lc > 0 {
+		t = p[2][:lc]
+	}
 
 	// see serializeToString for the format
 	r := &endpoint.Endpoint{
 		RecordType: p[1],
 		DNSName:    d,
-		Targets:    endpoint.Targets{t[0]},
+		Targets:    endpoint.Targets{t},
 	}
 
 	return r, nil
