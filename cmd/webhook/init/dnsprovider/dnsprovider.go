@@ -5,7 +5,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/caarlos0/env/v10"
+	"github.com/caarlos0/env/v11"
 	"github.com/muhlba91/external-dns-provider-adguard/cmd/webhook/init/configuration"
 	"github.com/muhlba91/external-dns-provider-adguard/internal/adguard"
 	"sigs.k8s.io/external-dns/endpoint"
