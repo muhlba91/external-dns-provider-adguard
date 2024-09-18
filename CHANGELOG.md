@@ -1,5 +1,20 @@
 # Changelog
 
+## [7.0.1](https://github.com/muhlba91/external-dns-provider-adguard/compare/v7.0.0...v7.0.1) (2024-09-18)
+
+
+### Bug Fixes
+
+* **ci:** fix goreleaser deprecations ([3b102aa](https://github.com/muhlba91/external-dns-provider-adguard/commit/3b102aa512d2e50074bcd8bc0aca0052de87d298))
+* fix parsing TXT owner records; fix [#126](https://github.com/muhlba91/external-dns-provider-adguard/issues/126) ([46e8923](https://github.com/muhlba91/external-dns-provider-adguard/commit/46e8923664772fe494334beddd473c467f2b6e6d))
+
+
+### Miscellaneous Chores
+
+* **deps:** update dependencies ([c2a4849](https://github.com/muhlba91/external-dns-provider-adguard/commit/c2a484938681b97eb34a6e11ae78114c489cba10))
+* **deps:** update golang.org/x/exp digest to 701f63a ([3b2c150](https://github.com/muhlba91/external-dns-provider-adguard/commit/3b2c15081ae0422636c60dd2301f20c1d415e08e))
+* **deps:** upgrade env to v11 ([7596a79](https://github.com/muhlba91/external-dns-provider-adguard/commit/7596a79208b0bb9f90168f3553ce3fb1a18eead9))
+
 ## [7.0.0](https://github.com/muhlba91/external-dns-provider-adguard/compare/v6.0.0...v7.0.0) (2024-09-06)
 
 
