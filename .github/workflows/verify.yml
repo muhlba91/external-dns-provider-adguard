@@ -131,7 +131,7 @@ jobs:
           go-version: "${{ matrix.go-version }}"
 
       - name: Install cosign
-        uses: sigstore/cosign-installer@v3.6.0
+        uses: sigstore/cosign-installer@v3.7.0
       - name: Download Syft
         uses: anchore/sbom-action/download-syft@v0.17.2
 
