@@ -16,6 +16,6 @@ LABEL org.opencontainers.image.version="${CI_COMMIT_TAG}"
 USER 20000:20000
 COPY --chmod=555 external-dns-provider-adguard /opt/external-dns-provider-adguard/webhook
 
-EXPOSE 8888/tcp
+EXPOSE 8888/tcp 8080/tcp
 
 ENTRYPOINT ["/opt/external-dns-provider-adguard/webhook"]

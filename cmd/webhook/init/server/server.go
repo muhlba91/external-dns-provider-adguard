@@ -44,10 +44,12 @@ func Init(config configuration.Config, p *webhook.Webhook) *http.Server {
 // Init server initialization function
 // The server will respond to the following endpoints:
 // - /healthz (GET): health check endpoint
+// - /metrics (GET): health metrics
 func InitHealthz(config configuration.Config, p *webhook.Webhook) *http.Server {
 	r := chi.NewRouter()
 
 	r.Get("/healthz", p.Health)
+	r.Get("/metrics", p.Metrics)
 
 	srv := createHTTPServer(fmt.Sprintf("%s:%d", config.HealthzHost, config.HealthzPort), r, config.ServerReadTimeout, config.ServerWriteTimeout)
 	go func() {

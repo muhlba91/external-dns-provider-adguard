@@ -99,6 +99,18 @@ func (p *Webhook) Health(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
+// Metrics handles the metrics request
+func (p *Webhook) Metrics(w http.ResponseWriter, r *http.Request) {
+	requestLog(r).Debug("requesting metrics")
+	s := p.provider.Health(r.Context())
+	err := json.NewEncoder(w).Encode(map[string]bool{"healthy": s})
+	if err != nil {
+		requestLog(r).WithField(logFieldError, err).Error("error encoding metrics")
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+}
+
 // Records handles the get request for records
 func (p *Webhook) Records(w http.ResponseWriter, r *http.Request) {
 	if err := p.acceptHeaderCheck(w, r); err != nil {
