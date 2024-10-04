@@ -1,5 +1,27 @@
 # Changelog
 
+## [8.0.0](https://github.com/muhlba91/external-dns-provider-adguard/compare/v7.0.1...v8.0.0) (2024-10-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* introduce new address and port configuration for healthz endpoint
+
+### Features
+
+* add metrics endpoint ([96e120f](https://github.com/muhlba91/external-dns-provider-adguard/commit/96e120f1e916e2a1ce534fa4bcaa584f48a5204a))
+* expose healthz endpoint on different port; collect status from adguard; fix [#131](https://github.com/muhlba91/external-dns-provider-adguard/issues/131) ([bb4678f](https://github.com/muhlba91/external-dns-provider-adguard/commit/bb4678f5af2712233ab454fc88ba54d7a2f84b78))
+
+
+### Bug Fixes
+
+* add test case for metrics endpoint ([3e8a157](https://github.com/muhlba91/external-dns-provider-adguard/commit/3e8a157b82554d8aff638059049e7d72b6e46984))
+
+
+### Miscellaneous Chores
+
+* **deps:** update dependency go to v1.23.2 ([a4adb43](https://github.com/muhlba91/external-dns-provider-adguard/commit/a4adb43b96fbd4392fe1e071f1d12aca2ed78829))
+
 ## [7.0.1](https://github.com/muhlba91/external-dns-provider-adguard/compare/v7.0.0...v7.0.1) (2024-09-18)
 
 
