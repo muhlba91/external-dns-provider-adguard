@@ -63,6 +63,12 @@ However, rules **not matching** above format, for example, `|domain.to.block`, *
 > **If** an **upgrade path** between version is **listed here**, please make sure to **follow** those paths **without skipping a version**!
 > Otherwise, the correct behaviour cannot be guaranteed, resulting in possible inconsistencies or errors.
 
+### v7 to v8
+
+`v8` introduces the `HEALTHZ_ADDRESS` (default: `0.0.0.0`) and `HEALTHZ_PORT` (default: `8080`) environment variable to introduce compatibility with the official Helm chart.
+
+Attention: if you are using a customized Helm chart, make sure to adjust the probes accordingly.
+
 ### v5 to v6
 
 `v6` introduces the `ADGUARD_SET_IMPORTANT_FLAG` environment variable to set the `important` flag for AdGuard rules. This is enabled by default.
@@ -120,16 +126,18 @@ sidecars:
     ports:
       - containerPort: 8888
         name: http
+      - containerPort: 8080
+        name: healthz
     livenessProbe:
       httpGet:
         path: /healthz
-        port: http
+        port: healthz
       initialDelaySeconds: 10
       timeoutSeconds: 5
     readinessProbe:
       httpGet:
         path: /healthz
-        port: http
+        port: healthz
       initialDelaySeconds: 10
       timeoutSeconds: 5
     env:
@@ -150,8 +158,6 @@ sidecars:
           secretKeyRef:
             name: adguard-configuration
             key: password
-      - name: SERVER_HOST
-        value: "0.0.0.0" 
       - name: DRY_RUN
         value: "false"  
 EOF

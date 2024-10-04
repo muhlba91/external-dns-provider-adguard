@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/muhlba91/external-dns-provider-adguard/internal/adguard"
 	log "github.com/sirupsen/logrus"
 
 	"sigs.k8s.io/external-dns/endpoint"
 	"sigs.k8s.io/external-dns/plan"
-	"sigs.k8s.io/external-dns/provider"
 )
 
 const (
@@ -17,7 +17,6 @@ const (
 	contentTypePlaintext  = "text/plain"
 	acceptHeader          = "Accept"
 	varyHeader            = "Vary"
-	healthPath            = "/healthz"
 	logFieldRequestPath   = "requestPath"
 	logFieldRequestMethod = "requestMethod"
 	logFieldError         = "error"
@@ -25,24 +24,13 @@ const (
 
 // Webhook for external dns provider
 type Webhook struct {
-	provider provider.Provider
+	provider adguard.Provider
 }
 
 // New creates a new instance of the Webhook
-func New(provider provider.Provider) *Webhook {
+func New(provider adguard.Provider) *Webhook {
 	p := Webhook{provider: provider}
 	return &p
-}
-
-// Health handles the health request
-func Health(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.URL.Path == healthPath {
-			w.WriteHeader(http.StatusOK)
-			return
-		}
-		next.ServeHTTP(w, r)
-	})
 }
 
 func (p *Webhook) contentTypeHeaderCheck(w http.ResponseWriter, r *http.Request) error {
@@ -99,6 +87,16 @@ func (p *Webhook) headerCheck(isContentType bool, w http.ResponseWriter, r *http
 	}
 
 	return nil
+}
+
+// Health handles the health request
+func (p *Webhook) Health(w http.ResponseWriter, r *http.Request) {
+	requestLog(r).Debug("requesting healthz")
+	if !p.provider.Health(r.Context()) {
+		w.WriteHeader(http.StatusServiceUnavailable)
+		return
+	}
+	w.WriteHeader(http.StatusOK)
 }
 
 // Records handles the get request for records

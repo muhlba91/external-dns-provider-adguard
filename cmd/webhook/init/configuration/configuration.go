@@ -11,6 +11,8 @@ import (
 type Config struct {
 	ServerHost           string        `env:"SERVER_HOST" envDefault:"localhost"`
 	ServerPort           int           `env:"SERVER_PORT" envDefault:"8888"`
+	HealthzHost          string        `env:"HEALTHZ_HOST" envDefault:"0.0.0.0"`
+	HealthzPort          int           `env:"HEALTHZ_PORT" envDefault:"8080"`
 	ServerReadTimeout    time.Duration `env:"SERVER_READ_TIMEOUT"`
 	ServerWriteTimeout   time.Duration `env:"SERVER_WRITE_TIMEOUT"`
 	DomainFilter         []string      `env:"DOMAIN_FILTER" envDefault:""`

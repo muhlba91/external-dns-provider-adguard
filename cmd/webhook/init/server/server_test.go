@@ -40,8 +40,10 @@ var mockProvider *MockProvider
 func TestMain(m *testing.M) {
 	mockProvider = &MockProvider{}
 
-	srv := Init(configuration.Init(), webhook.New(mockProvider))
-	go ShutdownGracefully(srv)
+	hook := webhook.New(mockProvider)
+	srv := Init(configuration.Init(), hook)
+	healthz := InitHealthz(configuration.Init(), hook)
+	go ShutdownGracefully(srv, healthz)
 
 	time.Sleep(300 * time.Millisecond)
 
@@ -49,6 +51,20 @@ func TestMain(m *testing.M) {
 	if err := srv.Shutdown(context.TODO()); err != nil {
 		panic(err)
 	}
+}
+
+func TestHealth(t *testing.T) {
+	testCases := []testCase{
+		{
+			name:               "health ok",
+			method:             http.MethodGet,
+			path:               "/healthz",
+			body:               "",
+			expectedStatusCode: http.StatusOK,
+		},
+	}
+
+	executeHealthzTestCases(t, testCases)
 }
 
 func TestRecords(t *testing.T) {
@@ -517,9 +533,51 @@ func executeTestCases(t *testing.T, testCases []testCase) {
 	}
 }
 
+func executeHealthzTestCases(t *testing.T, testCases []testCase) {
+	log.SetLevel(log.DebugLevel)
+
+	for i, tc := range testCases {
+		t.Run(fmt.Sprintf("%d. %s", i+1, tc.name), func(t *testing.T) {
+			mockProvider.testCase = tc
+			mockProvider.t = t
+
+			var bodyReader io.Reader
+			request, err := http.NewRequest(tc.method, "http://localhost:8080"+tc.path, bodyReader)
+			if err != nil {
+				t.Error(err)
+			}
+
+			response, err := http.DefaultClient.Do(request)
+			if err != nil {
+				t.Error(err)
+			}
+
+			if response.StatusCode != tc.expectedStatusCode {
+				t.Errorf("expected status code %d, got %d", tc.expectedStatusCode, response.StatusCode)
+			}
+
+			if tc.expectedBody != "" {
+				body, err := io.ReadAll(response.Body)
+				if err != nil {
+					t.Error(err)
+				}
+				_ = response.Body.Close()
+				actualTrimmedBody := strings.TrimSpace(string(body))
+				if actualTrimmedBody != tc.expectedBody {
+					t.Errorf("expected body '%s', got '%s'", tc.expectedBody, actualTrimmedBody)
+				}
+			}
+		})
+	}
+}
+
 type MockProvider struct {
 	t        *testing.T
 	testCase testCase
+}
+
+func (d *MockProvider) Health(_ context.Context) bool {
+	return true
 }
 
 func (d *MockProvider) Records(_ context.Context) ([]*endpoint.Endpoint, error) {

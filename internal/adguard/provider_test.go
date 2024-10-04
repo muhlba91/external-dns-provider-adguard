@@ -25,7 +25,7 @@ type testCase struct {
 }
 
 var mockHTTPClient *MockHTTPClient
-var testProvider *Provider
+var testProvider Provider
 
 func TestNewAdguardProvider(t *testing.T) {
 	log.SetLevel(log.DebugLevel)
@@ -425,7 +425,7 @@ func TestRecords(t *testing.T) {
 				testCase: tc,
 				t:        t,
 			}
-			testProvider = &Provider{
+			testProvider = &AGProvider{
 				client:       mockHTTPClient,
 				domainFilter: tc.domainFilter,
 			}
@@ -850,7 +850,7 @@ func TestApplyChanges(t *testing.T) {
 				testCase: tc,
 				t:        t,
 			}
-			testProvider = &Provider{
+			testProvider = &AGProvider{
 				Configuration: &Configuration{},
 				client:        mockHTTPClient,
 				domainFilter:  tc.domainFilter,
@@ -878,4 +878,8 @@ func (d *MockHTTPClient) GetFilteringRules(_ context.Context) ([]string, error) 
 func (d *MockHTTPClient) SetFilteringRules(_ context.Context, rules []string) error {
 	require.ElementsMatch(d.t, d.testCase.rules, rules)
 	return nil
+}
+
+func (d *MockHTTPClient) Status(_ context.Context) (bool, error) {
+	return true, nil
 }

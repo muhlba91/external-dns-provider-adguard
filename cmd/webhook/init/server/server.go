@@ -26,7 +26,6 @@ import (
 func Init(config configuration.Config, p *webhook.Webhook) *http.Server {
 	r := chi.NewRouter()
 
-	r.Use(webhook.Health)
 	r.Get("/", p.Negotiate)
 	r.Get("/records", p.Records)
 	r.Post("/records", p.ApplyChanges)
@@ -42,6 +41,24 @@ func Init(config configuration.Config, p *webhook.Webhook) *http.Server {
 	return srv
 }
 
+// Init server initialization function
+// The server will respond to the following endpoints:
+// - /healthz (GET): health check endpoint
+func InitHealthz(config configuration.Config, p *webhook.Webhook) *http.Server {
+	r := chi.NewRouter()
+
+	r.Get("/healthz", p.Health)
+
+	srv := createHTTPServer(fmt.Sprintf("%s:%d", config.HealthzHost, config.HealthzPort), r, config.ServerReadTimeout, config.ServerWriteTimeout)
+	go func() {
+		log.Infof("starting healthz on addr: '%s' ", srv.Addr)
+		if err := srv.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
+			log.Errorf("can't serve healthz on addr: '%s', error: %v", srv.Addr, err)
+		}
+	}()
+	return srv
+}
+
 func createHTTPServer(addr string, hand http.Handler, readTimeout, writeTimeout time.Duration) *http.Server {
 	return &http.Server{
 		ReadTimeout:  readTimeout,
@@ -52,7 +69,7 @@ func createHTTPServer(addr string, hand http.Handler, readTimeout, writeTimeout 
 }
 
 // ShutdownGracefully gracefully shutdown the http server
-func ShutdownGracefully(srv *http.Server) {
+func ShutdownGracefully(srv *http.Server, healthz *http.Server) {
 	sigCh := make(chan os.Signal, 1)
 	signal.Notify(sigCh, syscall.SIGHUP, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT)
 	sig := <-sigCh
@@ -61,6 +78,9 @@ func ShutdownGracefully(srv *http.Server) {
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	if err := srv.Shutdown(ctx); err != nil {
 		log.Errorf("error shutting down server: %v", err)
+	}
+	if err := healthz.Shutdown(ctx); err != nil {
+		log.Errorf("error shutting down healthz: %v", err)
 	}
 	cancel()
 }

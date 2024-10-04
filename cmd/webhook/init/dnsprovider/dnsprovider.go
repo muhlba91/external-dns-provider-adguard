@@ -16,7 +16,7 @@ import (
 
 type AdguardProviderFactory func(baseProvider *provider.BaseProvider, adguardConfig *adguard.Configuration) provider.Provider
 
-func Init(config configuration.Config) (provider.Provider, error) {
+func Init(config configuration.Config) (adguard.Provider, error) {
 	var domainFilter endpoint.DomainFilter
 	createMsg := "creating adguard provider with "
 

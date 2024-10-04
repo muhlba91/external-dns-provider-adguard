@@ -16,12 +16,19 @@ import (
 type Client interface {
 	GetFilteringRules(ctx context.Context) ([]string, error)
 	SetFilteringRules(ctx context.Context, rules []string) error
+	Status(ctx context.Context) (bool, error)
 }
 
 // hhtpClient type used to implement Client with an HTTP client
 type httpClient struct {
 	hc     *http.Client
 	config *Configuration
+}
+
+// adguardStatus is the response of retrieving the AdGuard status
+type adguardStatus struct {
+	Version string `json:"version"`
+	Running bool   `json:"running"`
 }
 
 // getFilteringRules is the response of retrieving filtering rules
@@ -43,8 +50,8 @@ func newAdguardClient(config *Configuration) (*httpClient, error) {
 	}
 
 	// check validity of the configuration
-	err := c.status(context.Background())
-	if err != nil {
+	s, err := c.Status(context.Background())
+	if err != nil || !s {
 		return nil, err
 	}
 
@@ -76,19 +83,26 @@ func (c *httpClient) doRequest(ctx context.Context, method, path string, body io
 	return resp, nil
 }
 
-func (c *httpClient) status(ctx context.Context) error {
+func (c *httpClient) Status(ctx context.Context) (bool, error) {
 	if c.config.DryRun {
 		log.Info("would check adguard configuration")
-		return nil
+		return true, nil
 	}
 
 	r, err := c.doRequest(ctx, http.MethodGet, "status", nil)
 	if err != nil {
-		return err
+		return false, err
 	}
-	_ = r.Body.Close()
+	defer r.Body.Close()
 
-	return nil
+	var resp adguardStatus
+	err = json.NewDecoder(r.Body).Decode(&resp)
+	if err != nil {
+		return false, err
+	}
+	log.Debugf("retrieved status: %+v", resp)
+
+	return resp.Running, nil
 }
 
 // Retrieves all existing filtering rules from Adguard

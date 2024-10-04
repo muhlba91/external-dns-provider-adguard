@@ -82,7 +82,7 @@ func TestInit(t *testing.T) {
 				return
 			}
 
-			assert.Equal(t, tc.expectedFlags, dnsProvider.(*adguard.Provider).Configuration.DNSEntryFlags())
+			assert.Equal(t, tc.expectedFlags, dnsProvider.(*adguard.AGProvider).Configuration.DNSEntryFlags())
 
 			assert.NoErrorf(t, err, "error creating provider")
 			assert.NotNil(t, dnsProvider)

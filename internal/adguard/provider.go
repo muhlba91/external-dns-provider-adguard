@@ -14,8 +14,14 @@ import (
 	"sigs.k8s.io/external-dns/provider"
 )
 
+// Provider interface for interfacing with Adguard
+type Provider interface {
+	provider.Provider
+	Health(ctx context.Context) bool
+}
+
 // Provider type for interfacing with Adguard
-type Provider struct {
+type AGProvider struct {
 	provider.BaseProvider
 
 	Configuration *Configuration
@@ -29,7 +35,7 @@ var (
 )
 
 // NewAdguardProvider initializes a new provider
-func NewAdguardProvider(domainFilter endpoint.DomainFilter, config *Configuration) (provider.Provider, error) {
+func NewAdguardProvider(domainFilter endpoint.DomainFilter, config *Configuration) (Provider, error) {
 	log.Debugf("using adguard at %s", config.URL)
 
 	// URL adjustment according to the specification
@@ -45,7 +51,7 @@ func NewAdguardProvider(domainFilter endpoint.DomainFilter, config *Configuratio
 		return nil, fmt.Errorf("failed to create the adguard client: %w", err)
 	}
 
-	p := &Provider{
+	p := &AGProvider{
 		Configuration: config,
 		client:        c,
 		domainFilter:  domainFilter,
@@ -54,8 +60,14 @@ func NewAdguardProvider(domainFilter endpoint.DomainFilter, config *Configuratio
 	return p, nil
 }
 
+// Health checks if AdGuard is available
+func (p *AGProvider) Health(ctx context.Context) bool {
+	s, _ := p.client.Status(ctx)
+	return s
+}
+
 // ApplyChanges syncs the desired state with Adguard
-func (p *Provider) ApplyChanges(ctx context.Context, changes *plan.Changes) error {
+func (p *AGProvider) ApplyChanges(ctx context.Context, changes *plan.Changes) error {
 	log.Debugf("received changes: %+v", changes)
 
 	or, err := p.client.GetFilteringRules(ctx)
@@ -139,7 +151,7 @@ func (p *Provider) ApplyChanges(ctx context.Context, changes *plan.Changes) erro
 }
 
 // Records reads all endpoints from Adguard
-func (p *Provider) Records(ctx context.Context) ([]*endpoint.Endpoint, error) {
+func (p *AGProvider) Records(ctx context.Context) ([]*endpoint.Endpoint, error) {
 	resp, err := p.client.GetFilteringRules(ctx)
 	if err != nil {
 		return nil, err

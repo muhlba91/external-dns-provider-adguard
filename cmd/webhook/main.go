@@ -33,6 +33,8 @@ func main() {
 		log.Fatalf("failed to initialize provider: %v", err)
 	}
 
-	srv := server.Init(config, webhook.New(provider))
-	server.ShutdownGracefully(srv)
+	hook := webhook.New(provider)
+	srv := server.Init(config, hook)
+	healthz := server.InitHealthz(config, hook)
+	server.ShutdownGracefully(srv, healthz)
 }
