@@ -1,4 +1,4 @@
-FROM gcr.io/distroless/static-debian12:nonroot
+FROM gcr.io/distroless/static-debian12:nonroot@sha256:3a03fc0826340c7deb82d4755ca391bef5adcedb8892e58412e1a6008199fa91
 
 ARG CI_COMMIT_TIMESTAMP
 ARG CI_COMMIT_SHA
