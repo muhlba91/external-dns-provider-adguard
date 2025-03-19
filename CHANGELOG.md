@@ -1,5 +1,14 @@
 # Changelog
 
+## [8.0.2](https://github.com/muhlba91/external-dns-provider-adguard/compare/v8.0.1...v8.0.2) (2025-03-19)
+
+
+### Miscellaneous Chores
+
+* **deps:** update actions/setup-go action to v5.4.0 ([5ac17ba](https://github.com/muhlba91/external-dns-provider-adguard/commit/5ac17bae2640b53c45feddd4ee3b66fb56eb232d))
+* **deps:** update actions/upload-artifact action to v4.6.2 ([ebec999](https://github.com/muhlba91/external-dns-provider-adguard/commit/ebec999d9960f5b4a84f56600a89be6dc4bb2199))
+* **deps:** update github/codeql-action action to v3.28.12 ([e86f19b](https://github.com/muhlba91/external-dns-provider-adguard/commit/e86f19b540c0457a4f65627143c88f9f282bcb01))
+
 ## [8.0.1](https://github.com/muhlba91/external-dns-provider-adguard/compare/v8.0.0...v8.0.1) (2025-03-18)
 
 
