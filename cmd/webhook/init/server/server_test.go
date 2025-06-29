@@ -456,7 +456,7 @@ func TestNegotiate(t *testing.T) {
 	testCases := []testCase{
 		{
 			name:               "happy case",
-			returnDomainFilter: endpoint.NewDomainFilter([]string{"a.de"}),
+			returnDomainFilter: *endpoint.NewDomainFilter([]string{"a.de"}),
 			method:             http.MethodGet,
 			headers:            map[string]string{"Accept": "application/external.dns.webhook+json;version=1"},
 			path:               "/",
@@ -617,5 +617,5 @@ func (d *MockProvider) AdjustEndpoints(endpoints []*endpoint.Endpoint) ([]*endpo
 }
 
 func (d *MockProvider) GetDomainFilter() endpoint.DomainFilterInterface {
-	return d.testCase.returnDomainFilter
+	return &d.testCase.returnDomainFilter
 }

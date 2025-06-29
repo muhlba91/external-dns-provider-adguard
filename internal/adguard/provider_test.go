@@ -54,7 +54,7 @@ func TestNewAdguardProvider(t *testing.T) {
 
 	for i, tc := range testCases {
 		t.Run(fmt.Sprintf("%d. %s", i+1, tc.name), func(t *testing.T) {
-			p, err := NewAdguardProvider(endpoint.DomainFilter{}, tc.config)
+			p, err := NewAdguardProvider(&endpoint.DomainFilter{}, tc.config)
 			if tc.hasError {
 				require.Nil(t, p)
 				require.Error(t, err)
@@ -341,7 +341,7 @@ func TestRecords(t *testing.T) {
 		{
 			name:         "valid case with domain filter",
 			hasError:     false,
-			domainFilter: endpoint.NewDomainFilter([]string{"domain.com"}),
+			domainFilter: *endpoint.NewDomainFilter([]string{"domain.com"}),
 			filteringRules: getFilteringRules{
 				UserRules: []string{
 					"|domain.com^$dnsrewrite=NOERROR;A;1.1.1.1",
@@ -427,7 +427,7 @@ func TestRecords(t *testing.T) {
 			}
 			testProvider = &AGProvider{
 				client:       mockHTTPClient,
-				domainFilter: tc.domainFilter,
+				domainFilter: &tc.domainFilter,
 			}
 
 			records, err := testProvider.Records(context.TODO())
@@ -853,7 +853,7 @@ func TestApplyChanges(t *testing.T) {
 			testProvider = &AGProvider{
 				Configuration: &Configuration{},
 				client:        mockHTTPClient,
-				domainFilter:  tc.domainFilter,
+				domainFilter:  &tc.domainFilter,
 			}
 
 			err := testProvider.ApplyChanges(context.TODO(), tc.changes)
