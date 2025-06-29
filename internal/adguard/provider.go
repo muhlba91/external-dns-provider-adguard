@@ -27,7 +27,7 @@ type AGProvider struct {
 	Configuration *Configuration
 
 	client       Client
-	domainFilter endpoint.DomainFilter
+	domainFilter *endpoint.DomainFilter
 }
 
 var (
@@ -35,7 +35,7 @@ var (
 )
 
 // NewAdguardProvider initializes a new provider
-func NewAdguardProvider(domainFilter endpoint.DomainFilter, config *Configuration) (Provider, error) {
+func NewAdguardProvider(domainFilter *endpoint.DomainFilter, config *Configuration) (Provider, error) {
 	log.Debugf("using adguard at %s", config.URL)
 
 	// URL adjustment according to the specification
