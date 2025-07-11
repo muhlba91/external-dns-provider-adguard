@@ -67,21 +67,6 @@ func TestHealth(t *testing.T) {
 	executeHealthzTestCases(t, testCases)
 }
 
-func TestMetrics(t *testing.T) {
-	testCases := []testCase{
-		{
-			name:               "metrics ok",
-			method:             http.MethodGet,
-			path:               "/metrics",
-			body:               "",
-			expectedStatusCode: http.StatusOK,
-			expectedBody:       "{\"healthy\":true}",
-		},
-	}
-
-	executeHealthzTestCases(t, testCases)
-}
-
 func TestRecords(t *testing.T) {
 	testCases := []testCase{
 		{

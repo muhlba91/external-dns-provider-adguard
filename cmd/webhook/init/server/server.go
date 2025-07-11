@@ -13,6 +13,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/muhlba91/external-dns-provider-adguard/cmd/webhook/init/configuration"
 	"github.com/muhlba91/external-dns-provider-adguard/pkg/webhook"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 
 	log "github.com/sirupsen/logrus"
 )
@@ -49,7 +50,7 @@ func InitHealthz(config configuration.Config, p *webhook.Webhook) *http.Server {
 	r := chi.NewRouter()
 
 	r.Get("/healthz", p.Health)
-	r.Get("/metrics", p.Metrics)
+	r.Get("/metrics", promhttp.Handler().ServeHTTP)
 
 	srv := createHTTPServer(fmt.Sprintf("%s:%d", config.HealthzHost, config.HealthzPort), r, config.ServerReadTimeout, config.ServerWriteTimeout)
 	go func() {
