@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.0.2](https://github.com/muhlba91/external-dns-provider-adguard/compare/v9.0.1...v9.0.2) (2025-07-11)
+
+
+### Miscellaneous Chores
+
+* **deps:** update golang.org/x/exp digest to 6ae5c78 ([d86a71d](https://github.com/muhlba91/external-dns-provider-adguard/commit/d86a71d60a4d6c0e65ecc96b999fb61f681cf44a))
+
 ## [9.0.1](https://github.com/muhlba91/external-dns-provider-adguard/compare/v9.0.0...v9.0.1) (2025-07-11)
 
 
