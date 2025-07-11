@@ -1,5 +1,20 @@
 # Changelog
 
+## [9.0.1](https://github.com/muhlba91/external-dns-provider-adguard/compare/v9.0.0...v9.0.1) (2025-07-11)
+
+
+### Bug Fixes
+
+* serve default prometheus metrics; fix [#133](https://github.com/muhlba91/external-dns-provider-adguard/issues/133) ([b2d633c](https://github.com/muhlba91/external-dns-provider-adguard/commit/b2d633cf29744732d77875dfc34db74244f2b942))
+
+
+### Miscellaneous Chores
+
+* **deps:** update anchore/sbom-action action to v0.20.2 ([4e16473](https://github.com/muhlba91/external-dns-provider-adguard/commit/4e16473fed006ed674b9c9da93cc1dd0c0afd63e))
+* **deps:** update dependency go to v1.24.5 ([646621a](https://github.com/muhlba91/external-dns-provider-adguard/commit/646621a701773864ff2c973c6987e5e4f481b3f5))
+* **deps:** update github/codeql-action action to v3.29.2 ([625edce](https://github.com/muhlba91/external-dns-provider-adguard/commit/625edcea0e78e91afebf04dfa625e5af4ebd3d3f))
+* **deps:** update step-security/harden-runner action to v2.12.2 ([a6fd21d](https://github.com/muhlba91/external-dns-provider-adguard/commit/a6fd21da88fe745426210853c1407d8e8a57583c))
+
 ## [9.0.0](https://github.com/muhlba91/external-dns-provider-adguard/compare/v8.0.1...v9.0.0) (2025-06-29)
 
 
