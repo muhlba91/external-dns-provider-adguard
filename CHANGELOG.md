@@ -1,5 +1,16 @@
 # Changelog
 
+## [9.0.2](https://github.com/muhlba91/external-dns-provider-adguard/compare/v9.0.1...v9.0.2) (2025-07-19)
+
+
+### Miscellaneous Chores
+
+* **deps:** update golang.org/x/exp digest to 542afb5 ([2355ee0](https://github.com/muhlba91/external-dns-provider-adguard/commit/2355ee0663d24508942f9b60c80e6e19cd330e16))
+* **deps:** update golang.org/x/exp digest to 645b1fa ([dfb2f7b](https://github.com/muhlba91/external-dns-provider-adguard/commit/dfb2f7b8241aa5087b2ed0f5fda4fa3a123a314a))
+* **deps:** update golang.org/x/exp digest to 6ae5c78 ([d86a71d](https://github.com/muhlba91/external-dns-provider-adguard/commit/d86a71d60a4d6c0e65ecc96b999fb61f681cf44a))
+* **deps:** update sigstore/cosign-installer action to v3.9.2 ([87d8c31](https://github.com/muhlba91/external-dns-provider-adguard/commit/87d8c319976707b85b34ed9a37e19ecb87e5d0fe))
+* **deps:** update step-security/harden-runner action to v2.13.0 ([a47d3ab](https://github.com/muhlba91/external-dns-provider-adguard/commit/a47d3ab19245350cba816106f6f0701f443474c7))
+
 ## [9.0.1](https://github.com/muhlba91/external-dns-provider-adguard/compare/v9.0.0...v9.0.1) (2025-07-11)
 
 
