@@ -1,7 +1,7 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
     "extends": [
-        "config:base",
+        "config:recommended",
         ":dependencyDashboard",
         ":semanticCommitTypeAll(chore)"
     ],
@@ -17,20 +17,20 @@
         "dockerfile"
     ],
     "github-actions": {
-        "fileMatch": [
-            "^(workflow-templates|\\.github/workflows)/[^/]+\\.ya?ml$",
-            "(^|/)action\\.ya?ml$"
+        "managerFilePatterns": [
+            "/^(workflow-templates|\\.github/workflows)/[^/]+\\.ya?ml$/",
+            "/(^|/)action\\.ya?ml$/"
         ]
     },
     "gomod": {
-        "fileMatch": [
-            "(^|/)go\\.mod$"
+        "managerFilePatterns": [
+            "/(^|/)go\\.mod$/"
         ]
     },
     "dockerfile": {
-        "fileMatch": [
-            "(^|/|\\.)([Dd]ocker|[Cc]ontainer)file$",
-            "(^|/)([Dd]ocker|[Cc]ontainer)file[^/]*$"
+        "managerFilePatterns": [
+            "/(^|/|\\.)([Dd]ocker|[Cc]ontainer)file$/",
+            "/(^|/)([Dd]ocker|[Cc]ontainer)file[^/]*$/"
         ]
     }
 }
