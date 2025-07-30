@@ -1,36 +1,13 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
     "extends": [
-        "config:recommended",
-        ":dependencyDashboard",
-        ":semanticCommitTypeAll(chore)"
+        "github>muhlba91/renovate-config",
+        "github>muhlba91/renovate-config:automerge(patch)",
+        "github>muhlba91/renovate-config:automerge(minor)"
     ],
-    "prHourlyLimit": 0,
-    "prConcurrentLimit": 0,
-    "baseBranches": [
-        "main"
-    ],
-    "ignorePaths": [],
     "enabledManagers": [
         "github-actions",
         "gomod",
         "dockerfile"
-    ],
-    "github-actions": {
-        "managerFilePatterns": [
-            "/^(workflow-templates|\\.github/workflows)/[^/]+\\.ya?ml$/",
-            "/(^|/)action\\.ya?ml$/"
-        ]
-    },
-    "gomod": {
-        "managerFilePatterns": [
-            "/(^|/)go\\.mod$/"
-        ]
-    },
-    "dockerfile": {
-        "managerFilePatterns": [
-            "/(^|/|\\.)([Dd]ocker|[Cc]ontainer)file$/",
-            "/(^|/)([Dd]ocker|[Cc]ontainer)file[^/]*$/"
-        ]
-    }
+    ]
 }
