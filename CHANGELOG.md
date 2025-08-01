@@ -1,5 +1,25 @@
 # Changelog
 
+## [9.1.0](https://github.com/muhlba91/external-dns-provider-adguard/compare/v9.0.1...v9.1.0) (2025-08-01)
+
+
+### Features
+
+* update renovate to use preset ([e125716](https://github.com/muhlba91/external-dns-provider-adguard/commit/e125716a2c4ae2ff7647cb196eff9b6ae710e61a))
+
+
+### Miscellaneous Chores
+
+* **config:** migrate config renovate.json ([0631e4d](https://github.com/muhlba91/external-dns-provider-adguard/commit/0631e4df61bb89578d75a0aca42a884d93e07bb8))
+* **deps:** update anchore/sbom-action action to v0.20.4 ([bd7428e](https://github.com/muhlba91/external-dns-provider-adguard/commit/bd7428e1f54d4e4ce4340377497d6795d50ce962))
+* **deps:** update github/codeql-action action to v3.29.5 ([a9a105f](https://github.com/muhlba91/external-dns-provider-adguard/commit/a9a105f113caf807cdf6914d7c725539ca7596bf))
+* **deps:** update golang.org/x/exp digest to 542afb5 ([2355ee0](https://github.com/muhlba91/external-dns-provider-adguard/commit/2355ee0663d24508942f9b60c80e6e19cd330e16))
+* **deps:** update golang.org/x/exp digest to 645b1fa ([dfb2f7b](https://github.com/muhlba91/external-dns-provider-adguard/commit/dfb2f7b8241aa5087b2ed0f5fda4fa3a123a314a))
+* **deps:** update golang.org/x/exp digest to 6ae5c78 ([d86a71d](https://github.com/muhlba91/external-dns-provider-adguard/commit/d86a71d60a4d6c0e65ecc96b999fb61f681cf44a))
+* **deps:** update module github.com/prometheus/client_golang to v1.23.0 ([11e3392](https://github.com/muhlba91/external-dns-provider-adguard/commit/11e3392074d6f1820055e9336b53005c4bff6d96))
+* **deps:** update sigstore/cosign-installer action to v3.9.2 ([87d8c31](https://github.com/muhlba91/external-dns-provider-adguard/commit/87d8c319976707b85b34ed9a37e19ecb87e5d0fe))
+* **deps:** update step-security/harden-runner action to v2.13.0 ([a47d3ab](https://github.com/muhlba91/external-dns-provider-adguard/commit/a47d3ab19245350cba816106f6f0701f443474c7))
+
 ## [9.0.1](https://github.com/muhlba91/external-dns-provider-adguard/compare/v9.0.0...v9.0.1) (2025-07-11)
 
 
