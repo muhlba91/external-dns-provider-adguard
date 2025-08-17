@@ -1,5 +1,41 @@
 # Changelog
 
+## [9.1.0](https://github.com/muhlba91/external-dns-provider-adguard/compare/v9.0.1...v9.1.0) (2025-08-17)
+
+
+### Features
+
+* update renovate to use preset ([e125716](https://github.com/muhlba91/external-dns-provider-adguard/commit/e125716a2c4ae2ff7647cb196eff9b6ae710e61a))
+* upgrade go to v1.25.x ([22c298a](https://github.com/muhlba91/external-dns-provider-adguard/commit/22c298aa2df5216f9a2e536db2edb444e031e724))
+
+
+### Miscellaneous Chores
+
+* **config:** migrate config renovate.json ([0631e4d](https://github.com/muhlba91/external-dns-provider-adguard/commit/0631e4df61bb89578d75a0aca42a884d93e07bb8))
+* **deps:** update actions/checkout action to v4.3.0 ([41dd43c](https://github.com/muhlba91/external-dns-provider-adguard/commit/41dd43c0c28ed94cd9651a2d0b6a7e785a25137c))
+* **deps:** update actions/checkout action to v5 ([6886584](https://github.com/muhlba91/external-dns-provider-adguard/commit/6886584c7e733b3750c2e2211d320063186ba70f))
+* **deps:** update actions/checkout digest to 08eba0b ([099c85b](https://github.com/muhlba91/external-dns-provider-adguard/commit/099c85b7e8e3ff351a180bada3044786e12c695d))
+* **deps:** update anchore/sbom-action action to v0.20.4 ([bd7428e](https://github.com/muhlba91/external-dns-provider-adguard/commit/bd7428e1f54d4e4ce4340377497d6795d50ce962))
+* **deps:** update anchore/sbom-action action to v0.20.5 ([54536e9](https://github.com/muhlba91/external-dns-provider-adguard/commit/54536e98f10d2acf1f2d31aedf5d13d1e3f128b4))
+* **deps:** update dependency go to v1.24.6 ([0d9575c](https://github.com/muhlba91/external-dns-provider-adguard/commit/0d9575cebefa028cea3292613144eef6abd3f9e2))
+* **deps:** update docker/login-action action to v3.5.0 ([a6244cf](https://github.com/muhlba91/external-dns-provider-adguard/commit/a6244cf58f2aa1971ce2e3e75b0c8ece684bd19a))
+* **deps:** update gcr.io/distroless/static-debian12:nonroot docker digest to cdf4daa ([ac6ed65](https://github.com/muhlba91/external-dns-provider-adguard/commit/ac6ed65d7f4b3ffb7413e89f8438eba4ae9e9157))
+* **deps:** update github/codeql-action action to v3.29.5 ([a9a105f](https://github.com/muhlba91/external-dns-provider-adguard/commit/a9a105f113caf807cdf6914d7c725539ca7596bf))
+* **deps:** update github/codeql-action action to v3.29.7 ([cbb7636](https://github.com/muhlba91/external-dns-provider-adguard/commit/cbb7636d9128e6477ee75c13c1fc993f271b80b1))
+* **deps:** update github/codeql-action action to v3.29.8 ([fe44aef](https://github.com/muhlba91/external-dns-provider-adguard/commit/fe44aef1f2139b63376283175cc94f9ecd364afd))
+* **deps:** update github/codeql-action action to v3.29.9 ([7e0b500](https://github.com/muhlba91/external-dns-provider-adguard/commit/7e0b500145771cbc482e70c3f3a8de80f94dfe5c))
+* **deps:** update golang.org/x/exp digest to 42675ad ([e88e449](https://github.com/muhlba91/external-dns-provider-adguard/commit/e88e449ab0c1d674b8f51b2cc3e6b3b4ce710b34))
+* **deps:** update golang.org/x/exp digest to 51f8813 ([f0870d1](https://github.com/muhlba91/external-dns-provider-adguard/commit/f0870d19e60b93808c17e7cb8bd30bd69532edd6))
+* **deps:** update golang.org/x/exp digest to 542afb5 ([2355ee0](https://github.com/muhlba91/external-dns-provider-adguard/commit/2355ee0663d24508942f9b60c80e6e19cd330e16))
+* **deps:** update golang.org/x/exp digest to 645b1fa ([dfb2f7b](https://github.com/muhlba91/external-dns-provider-adguard/commit/dfb2f7b8241aa5087b2ed0f5fda4fa3a123a314a))
+* **deps:** update golang.org/x/exp digest to 6ae5c78 ([d86a71d](https://github.com/muhlba91/external-dns-provider-adguard/commit/d86a71d60a4d6c0e65ecc96b999fb61f681cf44a))
+* **deps:** update golang.org/x/exp digest to a408d31 ([7e446b0](https://github.com/muhlba91/external-dns-provider-adguard/commit/7e446b00f532b1f33bc1087c5bbffce76816466f))
+* **deps:** update goreleaser/goreleaser-action action to v6.4.0 ([a577809](https://github.com/muhlba91/external-dns-provider-adguard/commit/a57780968cabd887470cfe69f17fd4f9969dc019))
+* **deps:** update module github.com/prometheus/client_golang to v1.23.0 ([11e3392](https://github.com/muhlba91/external-dns-provider-adguard/commit/11e3392074d6f1820055e9336b53005c4bff6d96))
+* **deps:** update sigstore/cosign-installer action to v3.9.2 ([87d8c31](https://github.com/muhlba91/external-dns-provider-adguard/commit/87d8c319976707b85b34ed9a37e19ecb87e5d0fe))
+* **deps:** update step-security/harden-runner action to v2.13.0 ([a47d3ab](https://github.com/muhlba91/external-dns-provider-adguard/commit/a47d3ab19245350cba816106f6f0701f443474c7))
+* update pre-commit ([e24565c](https://github.com/muhlba91/external-dns-provider-adguard/commit/e24565c150f9fe783fc6be3af406638d293a8493))
+
 ## [9.0.1](https://github.com/muhlba91/external-dns-provider-adguard/compare/v9.0.0...v9.0.1) (2025-07-11)
 
 
