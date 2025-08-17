@@ -1,8 +1,6 @@
 module github.com/muhlba91/external-dns-provider-adguard
 
-go 1.24.2
-
-toolchain go1.24.6
+go 1.25.0
 
 require (
 	github.com/caarlos0/env/v11 v11.3.1
