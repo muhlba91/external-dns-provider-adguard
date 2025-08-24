@@ -1,5 +1,17 @@
 # Changelog
 
+## [9.1.1](https://github.com/muhlba91/external-dns-provider-adguard/compare/v9.1.0...v9.1.1) (2025-08-24)
+
+
+### Miscellaneous Chores
+
+* **deps:** update actions/dependency-review-action action to v4.7.2 ([d5a00bc](https://github.com/muhlba91/external-dns-provider-adguard/commit/d5a00bc90ddf8e9045c9e2482c56b0a90745635c))
+* **deps:** update github/codeql-action action to v3.29.10 ([3e15520](https://github.com/muhlba91/external-dns-provider-adguard/commit/3e15520524b7c1960300025e1fd81929329f2bcd))
+* **deps:** update github/codeql-action action to v3.29.11 ([90025b3](https://github.com/muhlba91/external-dns-provider-adguard/commit/90025b3957617651745321c5d49901e97093110c))
+* **deps:** update golang.org/x/exp digest to 8b4c13b ([13b4d21](https://github.com/muhlba91/external-dns-provider-adguard/commit/13b4d21e962042d3e8a0536ebbbe99828250bbe8))
+* **deps:** update googleapis/release-please-action action to v4.3.0 ([e12eaab](https://github.com/muhlba91/external-dns-provider-adguard/commit/e12eaab70f590eeb1a9a9643b8b1980c079856ee))
+* **deps:** update module github.com/stretchr/testify to v1.11.0 ([2207af7](https://github.com/muhlba91/external-dns-provider-adguard/commit/2207af7c73e76e1207b2359c47b7276ab2f0a86a))
+
 ## [9.1.0](https://github.com/muhlba91/external-dns-provider-adguard/compare/v9.0.1...v9.1.0) (2025-08-17)
 
 
