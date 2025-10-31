@@ -106,44 +106,37 @@ See [cmd/webhook/init/configuration/configuration.go](./cmd/webhook/init/configu
 
 The Adguard webhook is provided as an OCI image in [ghcr.io/muhlba91/external-dns-provider-adguard](https://ghcr.io/muhlba91/external-dns-provider-adguard).
 
-The following example shows the deployment as a [sidecar container](https://kubernetes.io/docs/concepts/workloads/pods/#workload-resources-for-managing-pods) in the ExternalDNS pod using the [Bitnami Helm charts for ExternalDNS](https://github.com/bitnami/charts/tree/main/bitnami/external-dns).
+The following example shows the deployment as a [sidecar container](https://kubernetes.io/docs/concepts/workloads/pods/#workload-resources-for-managing-pods) in the ExternalDNS pod using the ExternalDNS [included Helm chart](https://github.com/kubernetes-sigs/external-dns/tree/master/charts/external-dns).
 
 ```shell
-helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo add external-dns https://kubernetes-sigs.github.io/external-dns/
 
 # create the adguard configuration
 kubectl create secret generic adguard-configuration --from-literal=url='<ADGUARD_URL>' --from-literal=user='<ADGUARD_USER>' --from-literal=password='<ADGUARD_PASSWORD>'
 
 # create the helm values file
 cat <<EOF > external-dns-adguard-values.yaml
-provider: webhook
-
-extraArgs:
-  webhook-provider-url: http://localhost:8888
-
-sidecars:
-  - name: adguard-webhook
-    image: ghcr.io/muhlba91/external-dns-provider-adguard:$RELEASE_VERSION
-    ports:
-      - containerPort: 8888
-        name: http
-      - containerPort: 8080
-        name: healthz
-    livenessProbe:
+provider: 
+  name: webhook
+  webhook:
+    image:
+      repository: ghcr.io/muhlba91/external-dns-provider-adguard
+      tag: latest
+    service:
+      port: 8888
+    livenessProbe: 
       httpGet:
         path: /healthz
-        port: healthz
+        port: 8080
       initialDelaySeconds: 10
       timeoutSeconds: 5
-    readinessProbe:
+    readinessProbe: 
       httpGet:
         path: /healthz
-        port: healthz
+        port: 8080
       initialDelaySeconds: 10
       timeoutSeconds: 5
     env:
-      - name: LOG_LEVEL
-        value: debug
       - name: ADGUARD_URL
         valueFrom:
           secretKeyRef:
@@ -159,12 +152,14 @@ sidecars:
           secretKeyRef:
             name: adguard-configuration
             key: password
+      - name: LOG_LEVEL
+        value: debug
       - name: DRY_RUN
-        value: "false"  
+        value: "false"
 EOF
 
 # install external-dns with helm
-helm install external-dns-adguard bitnami/external-dns -f external-dns-adguard-values.yaml
+helm install external-dns-adguard external-dns/external-dns -f external-dns-adguard-values.yaml
 ```
 
 ---
