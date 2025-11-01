@@ -48,3 +48,7 @@ go.work
 local.env
 covprofile
 bin/
+package.json
+.yarn/
+.pnp.cjs
+yarn.lock
