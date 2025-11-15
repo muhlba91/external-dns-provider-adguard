@@ -83,7 +83,7 @@ jobs:
           CI_COMMIT_TIMESTAMP: ${{ github.event.repository.updated_at }}
           CI_COMMIT_SHA: ${{ github.sha }}
           CI_COMMIT_TAG: ${{ needs.release.outputs.tag_name }}
-      
+
       - name: Parse Published Artifacts
         run: |
           echo "digest=$(echo "$ARTIFACTS" | jq -r '.[]|select(.type=="Docker Manifest")|select(.name|test(":v"))|.extra.Digest')" >> "$GITHUB_OUTPUT"
@@ -104,5 +104,4 @@ jobs:
             dist/*.tar.gz
             dist/*.sbom.json
             dist/*_checksums.txt
-            dist/*.sig
-            dist/*.pem
+            dist/*.sigstore.json
