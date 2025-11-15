@@ -1,5 +1,16 @@
 # Changelog
 
+## [11.0.0](https://github.com/muhlba91/external-dns-provider-adguard/compare/v10.0.1...v11.0.0) (2025-11-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* introduce windows packages
+
+### Features
+
+* reintroduce windows packages ([0df1007](https://github.com/muhlba91/external-dns-provider-adguard/commit/0df1007415b141b1894fceba4f1ea5c391b9ef1f))
+
 ## [10.0.1](https://github.com/muhlba91/external-dns-provider-adguard/compare/v10.0.0...v10.0.1) (2025-11-15)
 
 
