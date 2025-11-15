@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.0.1](https://github.com/muhlba91/external-dns-provider-adguard/compare/v10.0.0...v10.0.1) (2025-11-15)
+
+
+### Bug Fixes
+
+* **ci:** update goreleaser for cosign ([15afd25](https://github.com/muhlba91/external-dns-provider-adguard/commit/15afd25ef761c3154fd0ac6e699e757c8b4fbe65))
+
 ## [10.0.0](https://github.com/muhlba91/external-dns-provider-adguard/compare/v9.2.0...v10.0.0) (2025-11-15)
 
 
