@@ -1,5 +1,16 @@
 # Changelog
 
+## [10.0.0](https://github.com/muhlba91/external-dns-provider-adguard/compare/v9.2.0...v10.0.0) (2025-11-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove windows builds and releases
+
+### Features
+
+* remove windows builds ([5eeb3a6](https://github.com/muhlba91/external-dns-provider-adguard/commit/5eeb3a63bb1aae6779e6ab426c13442d9b78d2bf))
+
 ## [9.2.0](https://github.com/muhlba91/external-dns-provider-adguard/compare/v9.1.0...v9.2.0) (2025-11-15)
 
 
