@@ -1,5 +1,18 @@
 # Changelog
 
+## [11.0.1](https://github.com/muhlba91/external-dns-provider-adguard/compare/v11.0.0...v11.0.1) (2025-11-21)
+
+
+### Miscellaneous Chores
+
+* **deps:** update actions/checkout action to v5.0.1 ([bf5592c](https://github.com/muhlba91/external-dns-provider-adguard/commit/bf5592cd870a5b583375b9c7c6fd2547f17781ec))
+* **deps:** update actions/checkout action to v6 ([8a200bb](https://github.com/muhlba91/external-dns-provider-adguard/commit/8a200bb9586b0a4d694ac1ab2ff152b48426a755))
+* **deps:** update actions/checkout digest to 93cb6ef ([bbf291d](https://github.com/muhlba91/external-dns-provider-adguard/commit/bbf291d2f7e50727809ca0d35bedd8987975912b))
+* **deps:** update actions/setup-go action to v6.1.0 ([ddd86dd](https://github.com/muhlba91/external-dns-provider-adguard/commit/ddd86dd0c87f239866fda86bda6e4d609d4f7098))
+* **deps:** update anchore/sbom-action action to v0.20.10 ([5cb23e9](https://github.com/muhlba91/external-dns-provider-adguard/commit/5cb23e959cc3155241a3b8f1751f3d2eb63f8f12))
+* **deps:** update github/codeql-action action to v4.31.4 ([3c56547](https://github.com/muhlba91/external-dns-provider-adguard/commit/3c56547273559e82c5acd08a3e88b1a77d88c80f))
+* **deps:** update golangci/golangci-lint-action action to v9.1.0 ([2b1a114](https://github.com/muhlba91/external-dns-provider-adguard/commit/2b1a114667466b34eb79b24130b7e822fa6da447))
+
 ## [11.0.0](https://github.com/muhlba91/external-dns-provider-adguard/compare/v10.0.1...v11.0.0) (2025-11-15)
 
 
