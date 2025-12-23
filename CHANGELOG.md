@@ -1,5 +1,16 @@
 # Changelog
 
+## [11.0.2](https://github.com/muhlba91/external-dns-provider-adguard/compare/v11.0.1...v11.0.2) (2025-12-23)
+
+
+### Miscellaneous Chores
+
+* **deps:** update actions/attest-build-provenance action to v3.1.0 ([7b5e1fc](https://github.com/muhlba91/external-dns-provider-adguard/commit/7b5e1fc6cff90e77312b15e7d2120fcc89c72374))
+* **deps:** update anchore/sbom-action action to v0.21.0 ([c963947](https://github.com/muhlba91/external-dns-provider-adguard/commit/c9639477c44616da4f99a5208d9ae319812f36c0))
+* **deps:** update docker/setup-buildx-action action to v3.12.0 ([d6efc3e](https://github.com/muhlba91/external-dns-provider-adguard/commit/d6efc3e28e9f3cd9575facf69b6988610af2999b))
+* **deps:** update github/codeql-action action to v4.31.9 ([421483c](https://github.com/muhlba91/external-dns-provider-adguard/commit/421483c24c3e0b575987c7f33234bcf11d6e2a8a))
+* **deps:** update golang.org/x/exp digest to 944ab1f ([af33d05](https://github.com/muhlba91/external-dns-provider-adguard/commit/af33d055d06b397d99a84560856e8b8c6a5edb98))
+
 ## [11.0.1](https://github.com/muhlba91/external-dns-provider-adguard/compare/v11.0.0...v11.0.1) (2025-12-13)
 
 
