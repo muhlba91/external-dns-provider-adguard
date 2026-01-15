@@ -1,5 +1,23 @@
 # Changelog
 
+## [11.0.2](https://github.com/muhlba91/external-dns-provider-adguard/compare/v11.0.1...v11.0.2) (2026-01-15)
+
+
+### Miscellaneous Chores
+
+* **deps:** update actions/attest-build-provenance action to v3.1.0 ([7b5e1fc](https://github.com/muhlba91/external-dns-provider-adguard/commit/7b5e1fc6cff90e77312b15e7d2120fcc89c72374))
+* **deps:** update actions/setup-go action to v6.2.0 ([6c9f46c](https://github.com/muhlba91/external-dns-provider-adguard/commit/6c9f46c2a79938261ff56b0134cc88ba07096ce2))
+* **deps:** update anchore/sbom-action action to v0.21.0 ([c963947](https://github.com/muhlba91/external-dns-provider-adguard/commit/c9639477c44616da4f99a5208d9ae319812f36c0))
+* **deps:** update anchore/sbom-action action to v0.21.1 ([e687964](https://github.com/muhlba91/external-dns-provider-adguard/commit/e687964820daa5e451fec9f07ebb8990bfb6a3bc))
+* **deps:** update docker/setup-buildx-action action to v3.12.0 ([d6efc3e](https://github.com/muhlba91/external-dns-provider-adguard/commit/d6efc3e28e9f3cd9575facf69b6988610af2999b))
+* **deps:** update gcr.io/distroless/static-debian12:nonroot docker digest to cba10d7 ([9e437df](https://github.com/muhlba91/external-dns-provider-adguard/commit/9e437df3047de2c93cc2e08dfca66bb387ecba68))
+* **deps:** update github/codeql-action action to v4.31.10 ([d51752f](https://github.com/muhlba91/external-dns-provider-adguard/commit/d51752f4c499fbdfd4375405e4a08ee17f7d826c))
+* **deps:** update github/codeql-action action to v4.31.9 ([421483c](https://github.com/muhlba91/external-dns-provider-adguard/commit/421483c24c3e0b575987c7f33234bcf11d6e2a8a))
+* **deps:** update golang.org/x/exp digest to 716be56 ([9064657](https://github.com/muhlba91/external-dns-provider-adguard/commit/9064657e4a2ee7851ca6ead094388221b29ecf57))
+* **deps:** update golang.org/x/exp digest to 944ab1f ([af33d05](https://github.com/muhlba91/external-dns-provider-adguard/commit/af33d055d06b397d99a84560856e8b8c6a5edb98))
+* **deps:** update module github.com/go-chi/chi/v5 to v5.2.4 ([f427787](https://github.com/muhlba91/external-dns-provider-adguard/commit/f427787bc7a85da4640fc1ed951dd4df3263d7d7))
+* **deps:** update module github.com/sirupsen/logrus to v1.9.4 ([165a0a9](https://github.com/muhlba91/external-dns-provider-adguard/commit/165a0a97ae6993a41bb16ce7bfb60c7612aef773))
+
 ## [11.0.1](https://github.com/muhlba91/external-dns-provider-adguard/compare/v11.0.0...v11.0.1) (2025-12-13)
 
 
