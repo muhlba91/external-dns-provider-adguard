@@ -503,6 +503,7 @@ func executeTestCases(t *testing.T, testCases []testCase) {
 				request.Header.Set(k, v)
 			}
 
+			//nolint:gosec // we are aware that this is not secure, but it's just a test
 			response, err := http.DefaultClient.Do(request)
 			if err != nil {
 				t.Error(err)
@@ -547,6 +548,7 @@ func executeHealthzTestCases(t *testing.T, testCases []testCase) {
 				t.Error(err)
 			}
 
+			//nolint:gosec // we are aware that this is not secure, but it's just a test
 			response, err := http.DefaultClient.Do(request)
 			if err != nil {
 				t.Error(err)

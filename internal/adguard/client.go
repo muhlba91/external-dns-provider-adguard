@@ -69,6 +69,7 @@ func (c *httpClient) doRequest(ctx context.Context, method, path string, body io
 	req.SetBasicAuth(c.config.User, c.config.Password)
 	req.Header.Set("Content-Type", "application/json")
 
+	//nolint:gosec // we are aware that this is not secure, but it's a client to AdGuard Home, which is usually not exposed to the internet
 	resp, err := c.hc.Do(req)
 	if err != nil {
 		return nil, err

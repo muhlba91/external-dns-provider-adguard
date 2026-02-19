@@ -79,6 +79,7 @@ func (p *Webhook) headerCheck(isContentType bool, w http.ResponseWriter, r *http
 		}
 
 		err := fmt.Errorf(msg+": %s", err.Error())
+		//nolint:gosec // we are aware that this is not secure, but it's just a check for the header value
 		_, writeErr := fmt.Fprint(w, err.Error())
 		if writeErr != nil {
 			requestLog(r).WithField(logFieldError, writeErr).Fatalf("error writing error message to response writer")
