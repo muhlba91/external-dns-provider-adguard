@@ -1,5 +1,29 @@
 # Changelog
 
+## [11.1.0](https://github.com/muhlba91/external-dns-provider-adguard/compare/v11.0.2...v11.1.0) (2026-02-20)
+
+
+### Features
+
+* use golangci lint as latest ([ebf0869](https://github.com/muhlba91/external-dns-provider-adguard/commit/ebf0869f31b32896270634c5aba2cb00042699cd))
+
+
+### Bug Fixes
+
+* fix golint errors ([124fa1b](https://github.com/muhlba91/external-dns-provider-adguard/commit/124fa1b2bcd838d80b46790ece1a4419d8aa2f39))
+
+
+### Miscellaneous Chores
+
+* **deps:** update actions/dependency-review-action action to v4.8.3 ([cc87a3c](https://github.com/muhlba91/external-dns-provider-adguard/commit/cc87a3cafbe460c48f2f5e33b12fc833558cf10c))
+* **deps:** update gcr.io/distroless/static-debian12:nonroot docker digest to a932952 ([f859753](https://github.com/muhlba91/external-dns-provider-adguard/commit/f859753b7e24e744d09878778c27ebf2a0010495))
+* **deps:** update github/codeql-action action to v4.32.3 ([1b3c323](https://github.com/muhlba91/external-dns-provider-adguard/commit/1b3c323fdd046cac3405f16ab0f00cc4678fc382))
+* **deps:** update github/codeql-action action to v4.32.4 ([07bdd10](https://github.com/muhlba91/external-dns-provider-adguard/commit/07bdd104209f9ab636562eea5161aa89f448de36))
+* **deps:** update golang.org/x/exp digest to 2735e65 ([6d5cd77](https://github.com/muhlba91/external-dns-provider-adguard/commit/6d5cd77e81c91491162b28a4c04cede01e49d518))
+* **deps:** update golang.org/x/exp digest to 2842357 ([2692d6d](https://github.com/muhlba91/external-dns-provider-adguard/commit/2692d6dab9167b1b3c7034d353c3a2dfeb839ff5))
+* **deps:** update golang.org/x/exp digest to 3dfff04 ([36be3e7](https://github.com/muhlba91/external-dns-provider-adguard/commit/36be3e7674506aa003e049c5e222bdde507be7f5))
+* **deps:** update golang.org/x/exp digest to 81e46e3 ([da3497a](https://github.com/muhlba91/external-dns-provider-adguard/commit/da3497aab5cbac07601657a60eccfe64023b7887))
+
 ## [11.0.2](https://github.com/muhlba91/external-dns-provider-adguard/compare/v11.0.1...v11.0.2) (2026-02-07)
 
 
