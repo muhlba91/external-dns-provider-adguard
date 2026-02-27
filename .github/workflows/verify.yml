@@ -95,6 +95,7 @@ jobs:
           goveralls -coverprofile=covprofile -service=github
         env:
           COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
 
   dockerfile_lint:
     runs-on: ubuntu-latest
