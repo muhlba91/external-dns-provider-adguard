@@ -1,5 +1,39 @@
 # Changelog
 
+## [11.1.0](https://github.com/muhlba91/external-dns-provider-adguard/compare/v11.0.2...v11.1.0) (2026-02-27)
+
+
+### Features
+
+* upgrade go version to 1.26.x ([a885101](https://github.com/muhlba91/external-dns-provider-adguard/commit/a8851017dfc559b2118cab3ba04959b1aa04785d))
+* use golangci lint as latest ([ebf0869](https://github.com/muhlba91/external-dns-provider-adguard/commit/ebf0869f31b32896270634c5aba2cb00042699cd))
+
+
+### Bug Fixes
+
+* **ci:** ignore coveralls errors in pipeline ([ffe3183](https://github.com/muhlba91/external-dns-provider-adguard/commit/ffe3183ae012bf1113913b4b29024a84af74617b))
+* fix golint errors ([124fa1b](https://github.com/muhlba91/external-dns-provider-adguard/commit/124fa1b2bcd838d80b46790ece1a4419d8aa2f39))
+
+
+### Miscellaneous Chores
+
+* **deps:** update actions/attest-build-provenance action to v4 ([e8398d1](https://github.com/muhlba91/external-dns-provider-adguard/commit/e8398d1f3961a5ebc13a5f42afe1201678601d6e))
+* **deps:** update actions/attest-build-provenance action to v4.1.0 ([a022430](https://github.com/muhlba91/external-dns-provider-adguard/commit/a0224300d5bb73167863ca1869bc9d89afdb00de))
+* **deps:** update actions/dependency-review-action action to v4.8.3 ([cc87a3c](https://github.com/muhlba91/external-dns-provider-adguard/commit/cc87a3cafbe460c48f2f5e33b12fc833558cf10c))
+* **deps:** update actions/setup-go action to v6.3.0 ([e3d4f53](https://github.com/muhlba91/external-dns-provider-adguard/commit/e3d4f536d2fc761861b9bb026d6da13d001f1684))
+* **deps:** update actions/upload-artifact action to v7 ([7ae6dbd](https://github.com/muhlba91/external-dns-provider-adguard/commit/7ae6dbdf215f1b8c5a681cc87da67dce1e7bcbeb))
+* **deps:** update anchore/sbom-action action to v0.23.0 ([4ff953f](https://github.com/muhlba91/external-dns-provider-adguard/commit/4ff953f573c3c0fcaf9bee6e28200ad0b1dbcf26))
+* **deps:** update gcr.io/distroless/static-debian12:nonroot docker digest to a932952 ([f859753](https://github.com/muhlba91/external-dns-provider-adguard/commit/f859753b7e24e744d09878778c27ebf2a0010495))
+* **deps:** update github/codeql-action action to v4.32.3 ([1b3c323](https://github.com/muhlba91/external-dns-provider-adguard/commit/1b3c323fdd046cac3405f16ab0f00cc4678fc382))
+* **deps:** update github/codeql-action action to v4.32.4 ([07bdd10](https://github.com/muhlba91/external-dns-provider-adguard/commit/07bdd104209f9ab636562eea5161aa89f448de36))
+* **deps:** update golang.org/x/exp digest to 2735e65 ([6d5cd77](https://github.com/muhlba91/external-dns-provider-adguard/commit/6d5cd77e81c91491162b28a4c04cede01e49d518))
+* **deps:** update golang.org/x/exp digest to 2842357 ([2692d6d](https://github.com/muhlba91/external-dns-provider-adguard/commit/2692d6dab9167b1b3c7034d353c3a2dfeb839ff5))
+* **deps:** update golang.org/x/exp digest to 3dfff04 ([36be3e7](https://github.com/muhlba91/external-dns-provider-adguard/commit/36be3e7674506aa003e049c5e222bdde507be7f5))
+* **deps:** update golang.org/x/exp digest to 81e46e3 ([da3497a](https://github.com/muhlba91/external-dns-provider-adguard/commit/da3497aab5cbac07601657a60eccfe64023b7887))
+* **deps:** update goreleaser/goreleaser-action action to v7 ([a49eb7f](https://github.com/muhlba91/external-dns-provider-adguard/commit/a49eb7fa889982b5c379054ea43072e35d0e3565))
+* **deps:** update module github.com/caarlos0/env/v11 to v11.4.0 ([78b0c70](https://github.com/muhlba91/external-dns-provider-adguard/commit/78b0c7032f2b3af9631063cf02e9c2234f0a590f))
+* **deps:** update step-security/harden-runner action to v2.15.0 ([2c761a9](https://github.com/muhlba91/external-dns-provider-adguard/commit/2c761a97731c17e082fd2094d44868916ec22457))
+
 ## [11.0.2](https://github.com/muhlba91/external-dns-provider-adguard/compare/v11.0.1...v11.0.2) (2026-02-07)
 
 
