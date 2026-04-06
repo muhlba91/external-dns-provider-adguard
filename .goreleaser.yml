@@ -24,6 +24,10 @@ builds:
     main: ./cmd/webhook
 source:
   enabled: true
+checksum:
+  name_template: checksums.txt
+docker_digest:
+  name_template: digests.txt
 signs:
   - cmd: cosign
     signature: "${artifact}.sigstore.json"

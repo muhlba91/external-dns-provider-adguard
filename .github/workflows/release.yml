@@ -46,7 +46,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        go-version: [1.26.x]
+        go-version: [ 1.26.x ]
 
     steps:
       - uses: step-security/harden-runner@fe104658747b27e96e4f7e80cd0a94068e53901d # v2.16.1
@@ -73,8 +73,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - id: goreleaser
-        uses: goreleaser/goreleaser-action@ec59f474b9834571250b370d4735c50f8e2d1e29 # v7.0.0
+      - uses: goreleaser/goreleaser-action@ec59f474b9834571250b370d4735c50f8e2d1e29 # v7.0.0
         with:
           args: -p 3 release --clean --timeout 60m0s
           version: latest
@@ -84,24 +83,10 @@ jobs:
           CI_COMMIT_SHA: ${{ github.sha }}
           CI_COMMIT_TAG: ${{ needs.release.outputs.tag_name }}
 
-      - name: Parse Published Artifacts
-        run: |
-          echo "digest=$(echo "$ARTIFACTS" | jq -r '.[]|select(.type=="Docker Manifest")|select(.name|test(":v"))|.extra.Digest')" >> "$GITHUB_OUTPUT"
-          echo "name=$(echo "$ARTIFACTS" | jq -r '.[]|select(.type=="Docker Manifest")|select(.name|test(":v"))|.name|split(":")[0]')" >> "$GITHUB_OUTPUT"
-        id: image_metadata
-        env:
-          ARTIFACTS: ${{ steps.goreleaser.outputs.artifacts }}
-      - name: Publish Container Attestations
-        uses: actions/attest-build-provenance@a2bbfa25375fe432b6a289bc6b6cd05ecd0c4c32 # v4.1.0
+      - uses: actions/attest-build-provenance@a2bbfa25375fe432b6a289bc6b6cd05ecd0c4c32 # v4.1.0
         with:
-          subject-name: ${{ steps.image_metadata.outputs.name }}
-          subject-digest: ${{ steps.image_metadata.outputs.digest }}
+          subject-checksums: ./dist/digests.txt
           push-to-registry: true
-      - name: Publish Attestations
-        uses: actions/attest-build-provenance@a2bbfa25375fe432b6a289bc6b6cd05ecd0c4c32 # v4.1.0
+      - uses: actions/attest-build-provenance@a2bbfa25375fe432b6a289bc6b6cd05ecd0c4c32 # v4.1.0
         with:
-          subject-path: |
-            dist/*.tar.gz
-            dist/*.sbom.json
-            dist/*_checksums.txt
-            dist/*.sigstore.json
+          subject-checksums: ./dist/checksums.txt
