@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.1.1](https://github.com/muhlba91/external-dns-provider-adguard/compare/v11.1.0...v11.1.1) (2026-04-06)
+
+
+### Bug Fixes
+
+* **ci:** fix attestations and create from checksum and digest ([dfbae49](https://github.com/muhlba91/external-dns-provider-adguard/commit/dfbae4926bb5833db8c120f9c5a94f41da1480ec))
+
 ## [11.1.0](https://github.com/muhlba91/external-dns-provider-adguard/compare/v11.0.2...v11.1.0) (2026-04-06)
 
 
