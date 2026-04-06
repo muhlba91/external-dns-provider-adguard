@@ -1,5 +1,6 @@
 FROM gcr.io/distroless/static-debian12:nonroot@sha256:a9329520abc449e3b14d5bc3a6ffae065bdde0f02667fa10880c49b35c109fd1
 
+ARG TARGETPLATFORM
 ARG CI_COMMIT_TIMESTAMP
 ARG CI_COMMIT_SHA
 ARG CI_COMMIT_TAG
@@ -14,7 +15,7 @@ LABEL org.opencontainers.image.revision="${CI_COMMIT_SHA}"
 LABEL org.opencontainers.image.version="${CI_COMMIT_TAG}"
 
 USER 20000:20000
-COPY --chmod=555 external-dns-provider-adguard /opt/external-dns-provider-adguard/webhook
+COPY --chmod=555 $TARGETPLATFORM/external-dns-provider-adguard /opt/external-dns-provider-adguard/webhook
 
 EXPOSE 8888/tcp 8080/tcp
 
