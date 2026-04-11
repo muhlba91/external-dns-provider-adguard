@@ -1,5 +1,13 @@
 # Changelog
 
+## [11.1.2](https://github.com/muhlba91/external-dns-provider-adguard/compare/v11.1.1...v11.1.2) (2026-04-10)
+
+
+### Miscellaneous Chores
+
+* **deps:** update golang.org/x/exp digest to 746e56f ([82dd42f](https://github.com/muhlba91/external-dns-provider-adguard/commit/82dd42fb19dc09cb2a5f002d23b0d5ec38108b54))
+* **deps:** update step-security/harden-runner action to v2.17.0 ([a3e2e97](https://github.com/muhlba91/external-dns-provider-adguard/commit/a3e2e973b1c5bd49165e40e85cf9af1dc3d96599))
+
 ## [11.1.1](https://github.com/muhlba91/external-dns-provider-adguard/compare/v11.1.0...v11.1.1) (2026-04-06)
 
 
