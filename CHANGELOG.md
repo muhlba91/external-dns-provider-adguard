@@ -1,5 +1,17 @@
 # Changelog
 
+## [11.1.2](https://github.com/muhlba91/external-dns-provider-adguard/compare/v11.1.1...v11.1.2) (2026-04-16)
+
+
+### Miscellaneous Chores
+
+* **deps:** update actions/upload-artifact action to v7.0.1 ([b8821ec](https://github.com/muhlba91/external-dns-provider-adguard/commit/b8821ece3e5b14fa8e5320f010f6a9fa265f5d7d))
+* **deps:** update github/codeql-action action to v4.35.2 ([f45033d](https://github.com/muhlba91/external-dns-provider-adguard/commit/f45033d7b3ade7adbd7c0cca8159961cb6bccf94))
+* **deps:** update golang.org/x/exp digest to 746e56f ([82dd42f](https://github.com/muhlba91/external-dns-provider-adguard/commit/82dd42fb19dc09cb2a5f002d23b0d5ec38108b54))
+* **deps:** update googleapis/release-please-action action to v4.4.1 ([d9ebc6f](https://github.com/muhlba91/external-dns-provider-adguard/commit/d9ebc6f02a163ece6eb7dc702cfa0df2956c7fa0))
+* **deps:** update step-security/harden-runner action to v2.17.0 ([a3e2e97](https://github.com/muhlba91/external-dns-provider-adguard/commit/a3e2e973b1c5bd49165e40e85cf9af1dc3d96599))
+* **deps:** update step-security/harden-runner action to v2.18.0 ([ccead68](https://github.com/muhlba91/external-dns-provider-adguard/commit/ccead68a337f9ed9a0ee651d78a3bd39d671c3e6))
+
 ## [11.1.1](https://github.com/muhlba91/external-dns-provider-adguard/compare/v11.1.0...v11.1.1) (2026-04-06)
 
 
