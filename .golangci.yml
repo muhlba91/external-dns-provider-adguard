@@ -9,6 +9,8 @@ linters:
     - revive
     - unconvert
   settings:
+    goconst:
+      ignore-tests: true
     lll:
       line-length: 250
   exclusions:

@@ -8,7 +8,6 @@ import (
 
 	log "github.com/sirupsen/logrus"
 	"golang.org/x/exp/maps"
-	"golang.org/x/exp/slices"
 	"sigs.k8s.io/external-dns/endpoint"
 	"sigs.k8s.io/external-dns/plan"
 	"sigs.k8s.io/external-dns/provider"
@@ -105,10 +104,12 @@ func (p *AGProvider) ApplyChanges(ctx context.Context, changes *plan.Changes) er
 		epk := dep.DNSName + dep.RecordType
 		if ep, ok := eps[epk]; ok {
 			for _, t := range dep.Targets {
-				if slices.Contains(ep.Targets, t) {
-					ti := slices.Index(ep.Targets, t)
-					ep.Targets = append(ep.Targets[:ti], ep.Targets[ti+1:]...)
-					log.Debugf("deleting target %s for %s %s", t, dep.DNSName, dep.RecordType)
+				for i, target := range ep.Targets {
+					if target == t {
+						ep.Targets = append(ep.Targets[:i], ep.Targets[i+1:]...)
+						log.Debugf("deleting target %s for %s %s", t, dep.DNSName, dep.RecordType)
+						break
+					}
 				}
 				if len(ep.Targets) == 0 {
 					delete(eps, epk)
