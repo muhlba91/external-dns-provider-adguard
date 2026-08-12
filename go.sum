@@ -190,6 +190,8 @@ golang.org/x/exp v0.0.0-20260810151157-a8b543ca52da h1:YKw1FZDyWyXXZcBxalRHz3CHi
 golang.org/x/exp v0.0.0-20260810151157-a8b543ca52da/go.mod h1:EdfpwwqSu+0Li0mzskwHU6FWDV3t9Q+RZDo3QMUtL3Q=
 golang.org/x/exp v0.0.0-20260811152304-ee035b5b010f h1:iXpLj9sdDH/RLYsnOMpbETK6KWtrHwvegcc4psWJHV8=
 golang.org/x/exp v0.0.0-20260811152304-ee035b5b010f/go.mod h1:EdfpwwqSu+0Li0mzskwHU6FWDV3t9Q+RZDo3QMUtL3Q=
+golang.org/x/exp v0.0.0-20260812173653-3d80eb74bc5b h1:3XR0v9KL97wjTmRb+6RqMylL4d7ZWM1sQYIITGDxtmg=
+golang.org/x/exp v0.0.0-20260812173653-3d80eb74bc5b/go.mod h1:EdfpwwqSu+0Li0mzskwHU6FWDV3t9Q+RZDo3QMUtL3Q=
 golang.org/x/mod v0.35.0 h1:Ww1D637e6Pg+Zb2KrWfHQUnH2dQRLBQyAtpr/haaJeM=
 golang.org/x/mod v0.35.0/go.mod h1:+GwiRhIInF8wPm+4AoT6L0FA1QWAad3OMdTRx4tFYlU=
 golang.org/x/mod v0.36.0 h1:JJjpVx6myfUsUdAzZuOSTTmRE0PfZeNWzzvKrP7amb4=
