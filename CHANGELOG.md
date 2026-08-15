@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.1.3](https://github.com/muhlba91/external-dns-provider-adguard/compare/v11.1.2...v11.1.3) (2026-08-15)
+
+
+### Bug Fixes
+
+* fix release pipeline ([9c6b0fe](https://github.com/muhlba91/external-dns-provider-adguard/commit/9c6b0fef284eb8611d9d084b5b55bc88bb54bbbc))
+
 ## [11.1.2](https://github.com/muhlba91/external-dns-provider-adguard/compare/v11.1.1...v11.1.2) (2026-08-15)
 
 
