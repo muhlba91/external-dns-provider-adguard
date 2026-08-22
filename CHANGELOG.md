@@ -1,5 +1,20 @@
 # Changelog
 
+## [11.1.4](https://github.com/muhlba91/external-dns-provider-adguard/compare/v11.1.3...v11.1.4) (2026-08-22)
+
+
+### Miscellaneous Chores
+
+* **deps:** update docker/setup-buildx-action action to v4.3.0 ([6fd3bd6](https://github.com/muhlba91/external-dns-provider-adguard/commit/6fd3bd65043dd1e5134018064da0e961cf1b3cc0))
+* **deps:** update gcr.io/distroless/static-debian12:nonroot docker digest to afa5c87 ([4c8bfad](https://github.com/muhlba91/external-dns-provider-adguard/commit/4c8bfadf44d05a2c570d6506a99d1017924c757a))
+* **deps:** update github/codeql-action action to v4.37.8 ([889ac8e](https://github.com/muhlba91/external-dns-provider-adguard/commit/889ac8e967502677bdad2a79e01a0214ce0a41b0))
+* **deps:** update golang.org/x/exp digest to ca53665 ([5adcece](https://github.com/muhlba91/external-dns-provider-adguard/commit/5adcece904a352d8701f9368b729ea878eab6162))
+* **deps:** update module github.com/go-chi/chi/v5 to v5.3.2 ([67f6f9d](https://github.com/muhlba91/external-dns-provider-adguard/commit/67f6f9db6a38995698d56849c41bfd2d0cbc3cac))
+* **deps:** update module github.com/sirupsen/logrus to v1.10.1 ([e7a1f3a](https://github.com/muhlba91/external-dns-provider-adguard/commit/e7a1f3a759e7b935e534b8cac5fcdb17db0ee7c4))
+* **deps:** update module github.com/stretchr/testify to v1.12.0 ([cea30b8](https://github.com/muhlba91/external-dns-provider-adguard/commit/cea30b8304b26db220a56d4ad1179755cc871a2d))
+* **deps:** update module github.com/stretchr/testify to v1.12.1 ([99464ef](https://github.com/muhlba91/external-dns-provider-adguard/commit/99464ef2ac8de816ae3295f882ae054e60410935))
+* **deps:** update module sigs.k8s.io/external-dns to v0.22.0 ([8922429](https://github.com/muhlba91/external-dns-provider-adguard/commit/8922429967f39a6748585d7f7eddca3413a17bee))
+
 ## [11.1.3](https://github.com/muhlba91/external-dns-provider-adguard/compare/v11.1.2...v11.1.3) (2026-08-15)
 
 
