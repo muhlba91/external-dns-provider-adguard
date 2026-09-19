@@ -9,7 +9,7 @@ require (
 	github.com/sirupsen/logrus v1.10.2
 	github.com/stretchr/testify v1.12.1
 	golang.org/x/exp v0.0.0-20260908205506-85c1c2202aba
-	sigs.k8s.io/external-dns v0.22.0
+	sigs.k8s.io/external-dns v0.23.0
 )
 
 require (
