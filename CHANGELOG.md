@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.2.1](https://github.com/muhlba91/external-dns-provider-adguard/compare/v11.2.0...v11.2.1) (2026-09-25)
+
+
+### Miscellaneous Chores
+
+* **deps:** update github/codeql-action action to v4.38.2 ([713ef70](https://github.com/muhlba91/external-dns-provider-adguard/commit/713ef709bf0a487ac7f6f6de3edaf1c6ff65595c))
+
 ## [11.2.0](https://github.com/muhlba91/external-dns-provider-adguard/compare/v11.1.3...v11.2.0) (2026-09-19)
 
 
