@@ -1,5 +1,22 @@
 # Changelog
 
+## [11.2.1](https://github.com/muhlba91/external-dns-provider-adguard/compare/v11.2.0...v11.2.1) (2026-10-10)
+
+
+### Miscellaneous Chores
+
+* **ci:** fix github workflow concurrency ([6c4ce05](https://github.com/muhlba91/external-dns-provider-adguard/commit/6c4ce0593378f06d37da0cc27f569b644c6ef7ff))
+* **deps:** update actions/upload-artifact action to v7.0.2 ([f7425ed](https://github.com/muhlba91/external-dns-provider-adguard/commit/f7425ed1fbb066fce6f8e890b56c257c13c4145a))
+* **deps:** update anchore/sbom-action action to v0.24.3 ([971df2d](https://github.com/muhlba91/external-dns-provider-adguard/commit/971df2de9aead106457b3f139a26426d43fda4c0))
+* **deps:** update github/codeql-action action to v4.38.2 ([713ef70](https://github.com/muhlba91/external-dns-provider-adguard/commit/713ef709bf0a487ac7f6f6de3edaf1c6ff65595c))
+* **deps:** update github/codeql-action action to v4.38.3 ([81dae02](https://github.com/muhlba91/external-dns-provider-adguard/commit/81dae027eedfe8c70b6c74514c4c491c9d1a49d9))
+* **deps:** update golang.org/x/exp digest to 7677206 ([609bf34](https://github.com/muhlba91/external-dns-provider-adguard/commit/609bf34491af11c1efc76af8313f693591d242c1))
+* **deps:** update golang.org/x/exp digest to ca0d7ba ([05dc8c4](https://github.com/muhlba91/external-dns-provider-adguard/commit/05dc8c4140dd5a22a859ac43ca50c54fa473b124))
+* **deps:** update golang.org/x/exp digest to f45ad48 ([72248fe](https://github.com/muhlba91/external-dns-provider-adguard/commit/72248fe1b705272d8b31d8a2e8b125a55f4eeab4))
+* **deps:** update module github.com/prometheus/client_golang to v1.25.0 ([111e456](https://github.com/muhlba91/external-dns-provider-adguard/commit/111e4562f4934653f5741e4dda48e4bf4c9af27f))
+* **deps:** update step-security/harden-runner action to v2.22.0 ([08ff45a](https://github.com/muhlba91/external-dns-provider-adguard/commit/08ff45a05ca0c39dd890d862c1a6e20037db9950))
+* **deps:** update step-security/harden-runner action to v2.22.1 ([6efbec0](https://github.com/muhlba91/external-dns-provider-adguard/commit/6efbec022f1e836f4aab8c2ea170f4bafdedbf0f))
+
 ## [11.2.0](https://github.com/muhlba91/external-dns-provider-adguard/compare/v11.1.3...v11.2.0) (2026-09-19)
 
 
