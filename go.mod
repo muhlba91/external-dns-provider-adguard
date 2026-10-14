@@ -8,7 +8,7 @@ require (
 	github.com/prometheus/client_golang v1.25.0
 	github.com/sirupsen/logrus v1.10.2
 	github.com/stretchr/testify v1.12.1
-	golang.org/x/exp v0.0.0-20261013213113-2ab7f3cbc5fb
+	golang.org/x/exp v0.0.0-20261014143641-f0251eb4aa3e
 	sigs.k8s.io/external-dns v0.23.0
 )
 
