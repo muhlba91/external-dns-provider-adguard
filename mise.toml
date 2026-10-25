@@ -1,0 +1,10 @@
+min_version = "2026.10.0"
+
+[settings]
+lockfile = true
+lockfile_platforms = ["macos-arm64", "linux-x64", "linux-arm64"]
+
+[tools]
+go = "1.27.3"
+golangci-lint = "2.15.0"
+goreleaser = "2.19.0"

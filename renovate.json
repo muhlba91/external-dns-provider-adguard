@@ -3,11 +3,13 @@
     "extends": [
         "github>muhlba91/renovate-config",
         "github>muhlba91/renovate-config:automerge(patch)",
-        "github>muhlba91/renovate-config:automerge(minor)"
+        "github>muhlba91/renovate-config:automerge(minor)",
+        "github>muhlba91/renovate-config:group-go"
     ],
     "enabledManagers": [
         "github-actions",
         "gomod",
-        "dockerfile"
+        "dockerfile",
+        "mise"
     ]
 }

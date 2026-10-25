@@ -52,3 +52,6 @@ package.json
 .yarn/
 .pnp.cjs
 yarn.lock
+
+# mise
+mise.local.toml

@@ -42,10 +42,6 @@ jobs:
   lint_provider:
     runs-on: ubuntu-latest
     name: Lint Provider
-    strategy:
-      max-parallel: 4
-      matrix:
-        go-version: [1.27.x]
 
     steps:
       - uses: step-security/harden-runner@dc2769abcc0fcfbadfc1df54081c1608579ef6b2 # v2.22.2
@@ -56,13 +52,14 @@ jobs:
         with:
           fetch-depth: 0
 
+      - uses: jdx/mise-action@82a612c5ab8bcda7cc5db6b7e81a8e7584c3dc6e # v5.2.3
+
+      # Go comes from mise; setup-go only restores the module cache.
       - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
-        with:
-          go-version: "${{ matrix.go-version }}"
 
       - uses: golangci/golangci-lint-action@ba0d7d2ec06a0ea1cb5fa41b2e4a3ab91d21278a # v9.3.0
         with:
-          version: latest
+          install-mode: none
           args: -c .golangci.yml
           skip-cache: true
           skip-save-cache: true
@@ -73,10 +70,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
     name: Unit Tests
-    strategy:
-      max-parallel: 4
-      matrix:
-        go-version: [1.27.x]
 
     steps:
       - uses: step-security/harden-runner@dc2769abcc0fcfbadfc1df54081c1608579ef6b2 # v2.22.2
@@ -87,9 +80,10 @@ jobs:
         with:
           fetch-depth: 0
 
+      - uses: jdx/mise-action@82a612c5ab8bcda7cc5db6b7e81a8e7584c3dc6e # v5.2.3
+
+      # Go comes from mise; setup-go only restores the module cache.
       - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
-        with:
-          go-version: "${{ matrix.go-version }}"
 
       - run: |
           make test
@@ -125,10 +119,6 @@ jobs:
       - lint_provider
       - dockerfile_lint
       - test
-    strategy:
-      max-parallel: 4
-      matrix:
-        go-version: [1.27.x]
 
     steps:
       - uses: step-security/harden-runner@dc2769abcc0fcfbadfc1df54081c1608579ef6b2 # v2.22.2
@@ -139,9 +129,10 @@ jobs:
         with:
           fetch-depth: 0
 
+      - uses: jdx/mise-action@82a612c5ab8bcda7cc5db6b7e81a8e7584c3dc6e # v5.2.3
+
+      # Go comes from mise; setup-go only restores the module cache.
       - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
-        with:
-          go-version: "${{ matrix.go-version }}"
 
       - uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6 # v4.1.2
       - uses: anchore/sbom-action/download-syft@66cbf4bc1f1c0d2edc94016e65bc221b6bb0ad6c # v0.24.3
@@ -149,10 +140,7 @@ jobs:
       - uses: docker/setup-qemu-action@99012661954931238ded8c8b007157a8430204e1 # v4.4.0
       - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
 
-      - uses: goreleaser/goreleaser-action@a4f02ab5355a589de60d917a659ce617ed19b3de # v7.3.0
-        with:
-          args: -p 3 release --snapshot --clean --skip=publish --timeout 60m0s
-          version: latest
+      - run: goreleaser -p 3 release --snapshot --clean --skip=publish --timeout 60m0s
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CI_COMMIT_TIMESTAMP: ${{ github.event.pull_request.updated_at }}
