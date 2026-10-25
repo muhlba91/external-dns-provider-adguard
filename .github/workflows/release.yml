@@ -47,10 +47,6 @@ jobs:
       attestations: write
     needs:
       - release
-    strategy:
-      max-parallel: 4
-      matrix:
-        go-version: [1.27.x]
 
     steps:
       - uses: step-security/harden-runner@dc2769abcc0fcfbadfc1df54081c1608579ef6b2 # v2.22.2
@@ -61,9 +57,9 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+      - uses: jdx/mise-action@82a612c5ab8bcda7cc5db6b7e81a8e7584c3dc6e # v5.2.3
         with:
-          go-version: "${{ matrix.go-version }}"
+          cache: false
 
       - uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6 # v4.1.2
       - uses: anchore/sbom-action/download-syft@66cbf4bc1f1c0d2edc94016e65bc221b6bb0ad6c # v0.24.3
@@ -77,10 +73,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: goreleaser/goreleaser-action@a4f02ab5355a589de60d917a659ce617ed19b3de # v7.3.0
-        with:
-          args: -p 3 release --clean --timeout 60m0s
-          version: latest
+      - run: goreleaser -p 3 release --clean --timeout 60m0s
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CI_COMMIT_TIMESTAMP: ${{ github.event.repository.updated_at }}

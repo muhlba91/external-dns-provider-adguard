@@ -164,6 +164,10 @@ helm install external-dns-adguard external-dns/external-dns -f external-dns-adgu
 
 ---
 
+## Development
+
+Tool versions (Go, golangci-lint, goreleaser) are managed with [mise](https://mise.jdx.dev): run `mise trust` and `mise install` once, then use the usual commands (`make ...`, `go test ./...`).
+
 ## Contributors
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
