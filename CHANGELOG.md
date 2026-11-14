@@ -1,5 +1,15 @@
 # Changelog
 
+## [11.2.2](https://github.com/muhlba91/external-dns-provider-adguard/compare/v11.2.1...v11.2.2) (2026-11-14)
+
+
+### Miscellaneous Chores
+
+* **deps:** update dependency goreleaser to v2.20.2 ([5cd612f](https://github.com/muhlba91/external-dns-provider-adguard/commit/5cd612f324ff8a803103928f3ff87aeff1f0adce))
+* **deps:** update golang.org/x/exp digest to d10d3b4 ([66d5b0b](https://github.com/muhlba91/external-dns-provider-adguard/commit/66d5b0b997aa844811f3ad2f054e33b86dfd0826))
+* **deps:** update golang.org/x/exp digest to e397061 ([943d010](https://github.com/muhlba91/external-dns-provider-adguard/commit/943d01018e94e68c33a06258d27fb975fc460fc1))
+* **deps:** update jdx/mise-action action to v5.2.8 ([0e38aeb](https://github.com/muhlba91/external-dns-provider-adguard/commit/0e38aebb6697b849946116846f1af30ccaaa7902))
+
 ## [11.2.1](https://github.com/muhlba91/external-dns-provider-adguard/compare/v11.2.0...v11.2.1) (2026-11-11)
 
 
