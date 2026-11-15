@@ -5,7 +5,7 @@ ARG CI_COMMIT_TIMESTAMP
 ARG CI_COMMIT_SHA
 ARG CI_COMMIT_TAG
 
-LABEL org.opencontainers.image.authors="Daniel Muehlbachler-Pietrzykowski <daniel.muehlbachler@niftyside.com>"
+LABEL org.opencontainers.image.authors="Daniel Muehlbachler-Pietrzykowski <dev@muehlbachler.io>"
 LABEL org.opencontainers.image.vendor="Daniel Muehlbachler-Pietrzykowski"
 LABEL org.opencontainers.image.source="https://github.com/muhlba91/external-dns-provider-adguard"
 LABEL org.opencontainers.image.created="${CI_COMMIT_TIMESTAMP}"
