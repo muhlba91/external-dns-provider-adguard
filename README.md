@@ -1,11 +1,11 @@
 # External DNS - Adguard Home Provider (Webhook)
 
-[![](https://img.shields.io/github/license/muhlba91/external-dns-provider-adguard?style=for-the-badge)](LICENSE.md)
-[![](https://img.shields.io/github/actions/workflow/status/muhlba91/external-dns-provider-adguard/verify.yml?style=for-the-badge)](https://github.com/muhlba91/external-dns-provider-adguard/actions/workflows/verify.yml)
-[![](https://img.shields.io/coverallsCoverage/github/muhlba91/external-dns-provider-adguard?style=for-the-badge)](https://github.com/muhlba91/external-dns-provider-adguard/)
-[![](https://api.scorecard.dev/projects/github.com/muhlba91/external-dns-provider-adguard/badge?style=for-the-badge)](https://scorecard.dev/viewer/?uri=github.com/muhlba91/external-dns-provider-adguard)
-[![](https://img.shields.io/github/release-date/muhlba91/external-dns-provider-adguard?style=for-the-badge)](https://github.com/muhlba91/external-dns-provider-adguard/releases)
-[![](https://img.shields.io/github/all-contributors/muhlba91/external-dns-provider-adguard?color=ee8449&style=for-the-badge)](#contributors)
+[![License](https://img.shields.io/github/license/muhlba91/external-dns-provider-adguard?style=for-the-badge)](LICENSE.md)
+[![Build status](https://img.shields.io/github/actions/workflow/status/muhlba91/external-dns-provider-adguard/verify.yml?style=for-the-badge)](https://github.com/muhlba91/external-dns-provider-adguard/actions/workflows/verify.yml)
+[![Coverage](https://img.shields.io/coverallsCoverage/github/muhlba91/external-dns-provider-adguard?style=for-the-badge)](https://github.com/muhlba91/external-dns-provider-adguard/)
+[![Scorecard](https://api.scorecard.dev/projects/github.com/muhlba91/external-dns-provider-adguard/badge?style=for-the-badge)](https://scorecard.dev/viewer/?uri=github.com/muhlba91/external-dns-provider-adguard)
+[![Release date](https://img.shields.io/github/release-date/muhlba91/external-dns-provider-adguard?style=for-the-badge)](https://github.com/muhlba91/external-dns-provider-adguard/releases)
+[![Contributors](https://img.shields.io/github/all-contributors/muhlba91/external-dns-provider-adguard?color=ee8449&style=for-the-badge)](#contributors)
 <a href="https://www.buymeacoffee.com/muhlba91" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="28" width="150"></a>
 
 The Adguard Home Provider Webhook for [External DNS](https://github.com/kubernetes-sigs/external-dns) provides support for [Adguard Home filtering rules](https://github.com/AdguardTeam/AdGuardHome/wiki/Hosts-Blocklists#adblock-style).
@@ -116,7 +116,7 @@ kubectl create secret generic adguard-configuration --from-literal=url='<ADGUARD
 
 # create the helm values file
 cat <<EOF > external-dns-adguard-values.yaml
-provider: 
+provider:
   name: webhook
   webhook:
     image:
@@ -124,13 +124,13 @@ provider:
       tag: latest
     service:
       port: 8888
-    livenessProbe: 
+    livenessProbe:
       httpGet:
         path: /healthz
         port: 8080
       initialDelaySeconds: 10
       timeoutSeconds: 5
-    readinessProbe: 
+    readinessProbe:
       httpGet:
         path: /healthz
         port: 8080

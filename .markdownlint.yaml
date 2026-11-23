@@ -1,0 +1,8 @@
+---
+# Markdown rules (`make lint`).
+default: true
+MD013: false # prose and tables are not wrapped
+MD024:
+  siblings_only: true # rule files repeat the labels Rule, Why, Good, Bad, Source and Check
+MD033:
+  allowed_elements: [a, br, details, img, summary] # README badges and sponsor button

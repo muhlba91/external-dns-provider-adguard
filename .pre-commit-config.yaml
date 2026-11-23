@@ -1,4 +1,6 @@
 ---
+default_language_version:
+  node: system
 repos:
   - repo: https://github.com/siderolabs/conform
     rev: v0.1.0-alpha.33
@@ -11,12 +13,13 @@ repos:
     hooks:
       - id: end-of-file-fixer
       - id: trailing-whitespace
+        args: [
+            "--markdown-linebreak-ext=md"
+        ]
       - id: check-json
-        exclude: .eslintrc.json|node_modules/*
       - id: check-merge-conflict
       - id: check-symlinks
       - id: check-toml
-      - id: check-xml
       - id: check-yaml
       - id: detect-aws-credentials
         args: [
@@ -32,10 +35,24 @@ repos:
 #            "next"
 #        ]
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.28.0
+    rev: v8.30.1
     hooks:
       - id: gitleaks
-  - repo: https://github.com/golangci/golangci-lint
-    rev: v2.4.0
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.50.1
+    hooks:
+      - id: markdownlint
+        exclude: ^(CHANGELOG|LICENSE)\.md$
+  - repo: local
     hooks:
       - id: golangci-lint
+        name: golangci-lint
+        language: system
+        entry: golangci-lint run -c .golangci.yml
+        types: [go]
+        pass_filenames: false
+      - id: actionlint
+        name: actionlint
+        language: system
+        entry: actionlint
+        files: ^\.github/workflows/.*\.ya?ml$
